@@ -551,20 +551,32 @@ let currentFilter = 'ALL';
 let selectedRiskKey = null;
 let charts = {};
 
-/* ── Field helpers ── */
-const g = (r,...ks)=>{for(const k of ks)if(r[k]!==undefined&&r[k]!=='')return r[k];return '';};
-const getMachineName = r=>g(r,'name','machineName','ชื่อเครื่องจักร')||'(ไม่ระบุ)';
-const getMachineId   = r=>g(r,'id','machineId','asset_id');
-const getDept        = r=>g(r,'department','dept','แผนก')||'ไม่ระบุ';
-const getBuilding    = r=>g(r,'building','อาคาร');
-const getActionRaw   = r=>g(r,'action','Action');
-const getCondition   = r=>g(r,'condition','สภาพ','Condition');
-const getNotes       = r=>g(r,'note','notes','หมายเหตุ');
-const getTimestamp   = r=>g(r,'timestamp','Timestamp','date','surveyDate');
-const getValue       = r=>{const v=parseFloat(g(r,'value','มูลค่า','bookValue')||0);return isNaN(v)?0:v;};
-const actionKey      = r=>{const a=getActionRaw(r).toUpperCase();return a.startsWith('MOVE')?'MOVE':a.startsWith('SELL')?'SELL':a.startsWith('SCRAP')?'SCRAP':a.startsWith('NEW')?'NEW':'';};
-const getRisksArr    = r=>{const v=r.risks||r.risk||r['Risk Flags']||[];if(Array.isArray(v))return v;const s=String(v).replace(/[\[\]"]/g,'').trim();return s?s.split(/[,/]/).map(x=>x.trim()).filter(Boolean):[];};
-const hasRisk        = r=>getRisksArr(r).length>0;
+/* ── Field helpers ──
+   Apps Script doGet returns top-level mapped fields (some empty) + r.raw (Thai column names)
+   Actual data lives in: raw['ชื่อเครื่องจักร'], raw['Asset ID'], raw['มูลค่า (฿)'],
+                         raw['Risk Flags'], raw['หมายเหตุ'], raw['สภาพ']
+*/
+const raw  = r => r.raw || {};
+const g    = (r,...ks)=>{for(const k of ks)if(r[k]!==undefined&&r[k]!=='')return r[k];return '';};
+const getMachineName = r => g(r,'name','machineName') || raw(r)['ชื่อเครื่องจักร'] || '(ไม่ระบุ)';
+const getMachineId   = r => g(r,'id','machineId','asset_id') || raw(r)['Asset ID'] || '';
+const getDept        = r => g(r,'department','dept') || raw(r)['แผนก'] || 'ไม่ระบุ';
+const getBuilding    = r => g(r,'building') || raw(r)['อาคาร'] || '';
+const getActionRaw   = r => g(r,'action','Action') || raw(r)['Action'] || '';
+const getCondition   = r => g(r,'condition') || raw(r)['สภาพ'] || '';
+const getNotes       = r => g(r,'note','notes') || raw(r)['หมายเหตุ'] || '';
+const getTimestamp   = r => g(r,'timestamp','Timestamp') || raw(r)['วันที่สำรวจ'] || '';
+const getValue       = r => { const v=parseFloat(g(r,'value') || raw(r)['มูลค่า (฿)'] || 0); return isNaN(v)?0:v; };
+const actionKey      = r => { const a=getActionRaw(r).toUpperCase(); return a.startsWith('MOVE')?'MOVE':a.startsWith('SELL')?'SELL':a.startsWith('SCRAP')?'SCRAP':a.startsWith('NEW')?'NEW':''; };
+const getRisksArr    = r => {
+  // top-level r.risks may be empty array; real data is in raw['Risk Flags'] as "heavy, specialist, liquid"
+  const v = (Array.isArray(r.risks) && r.risks.length ? r.risks : null)
+         || raw(r)['Risk Flags'] || r.risk || [];
+  if(Array.isArray(v)) return v.filter(Boolean);
+  const s = String(v).replace(/[\[\]"]/g,'').trim();
+  return s ? s.split(/,\s*/).map(x=>x.trim()).filter(Boolean) : [];
+};
+const hasRisk = r => getRisksArr(r).length > 0;
 const fmtBaht        = n=>n>=1000000?`฿${(n/1000000).toFixed(1)}M`:n>=1000?`฿${(n/1000).toFixed(0)}K`:`฿${n.toLocaleString()}`;
 const fmtDate        = d=>{try{return d?new Date(d).toLocaleDateString('th-TH',{day:'2-digit',month:'short',year:'2-digit'}):'—';}catch{return d||'—';}};
 const esc            = s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
