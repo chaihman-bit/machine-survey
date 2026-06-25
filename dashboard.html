@@ -19,170 +19,210 @@
 body{font-family:'Sarabun',-apple-system,BlinkMacSystemFont,sans-serif;background:#F0F4FA;color:var(--text);}
 
 /* ── Header ── */
-.header{background:var(--navy);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(0,0,0,.3);position:sticky;top:0;z-index:100;}
+.header{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(0,0,0,.3);position:sticky;top:0;z-index:200;}
 .header-left{display:flex;align-items:center;gap:12px;}
-.header-icon{font-size:28px;}
-.header-text h1{font-size:18px;font-weight:700;color:#fff;}
-.header-text p{font-size:11px;color:var(--orange-l);margin-top:2px;}
-.header-right{display:flex;align-items:center;gap:12px;}
-.last-update{font-size:11px;color:rgba(255,255,255,.6);}
-.btn-refresh{background:var(--orange);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit;}
-.btn-refresh:hover{background:var(--orange-l);}
-.btn-refresh.loading{opacity:.7;pointer-events:none;}
+.header-icon{font-size:26px;}
+.header-text h1{font-size:17px;font-weight:700;color:#fff;}
+.header-text p{font-size:11px;color:var(--orange-l);margin-top:1px;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.last-update{font-size:11px;color:rgba(255,255,255,.55);}
+.btn-refresh{background:var(--orange);color:#fff;border:none;padding:7px 14px;border-radius:8px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:inherit;transition:.15s;}
+.btn-refresh:hover{background:var(--orange-l);color:var(--navy);}
+.btn-refresh.loading{opacity:.6;pointer-events:none;}
 
 /* ── Nav Tabs ── */
-.nav-tabs{background:var(--steel);display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs{background:var(--steel);display:flex;overflow-x:auto;scrollbar-width:none;position:sticky;top:57px;z-index:190;}
 .nav-tabs::-webkit-scrollbar{display:none;}
-.nav-tab{padding:10px 20px;font-size:13px;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s;}
-.nav-tab:hover{color:#fff;background:rgba(255,255,255,.06);}
+.nav-tab{padding:11px 22px;font-size:13px;font-weight:600;color:rgba(255,255,255,.55);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s;user-select:none;}
+.nav-tab:hover{color:#fff;background:rgba(255,255,255,.07);}
 .nav-tab.active{color:#fff;border-bottom-color:var(--orange);}
+
+/* ── Active Filter Banner ── */
+#filterBanner{display:none;background:#FFF3CD;border-bottom:1px solid #F3C623;padding:8px 24px;font-size:12px;color:var(--yellow);font-weight:600;align-items:center;gap:10px;}
+#filterBanner span{cursor:pointer;background:var(--yellow);color:#fff;border-radius:100px;padding:2px 10px;font-size:11px;}
 
 /* ── Loading / Error ── */
 .loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;gap:16px;}
-.spinner{width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 1s linear infinite;}
+.spinner{width:44px;height:44px;border:4px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 1s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .loading-text{color:var(--steel);font-size:14px;}
 .error-wrap{max-width:480px;margin:60px auto;text-align:center;padding:32px;background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.08);}
-.error-icon{font-size:48px;margin-bottom:12px;}
+.error-icon{font-size:44px;margin-bottom:10px;}
 .error-wrap h2{color:var(--red);margin-bottom:8px;}
-.error-wrap code{background:#f5f5f5;padding:4px 8px;border-radius:6px;font-size:12px;display:block;margin:12px 0;word-break:break-all;}
+.error-wrap code{background:#f5f5f5;padding:4px 8px;border-radius:6px;font-size:11px;display:block;margin:10px 0;word-break:break-all;}
 
-/* ── Layout ── */
-main{max-width:1360px;margin:0 auto;padding:24px 20px;}
-.section{margin-bottom:28px;}
-.section-title{font-size:13px;font-weight:700;color:var(--steel);text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+/* ── Main ── */
+main{max-width:1360px;margin:0 auto;padding:22px 20px;}
+.section{margin-bottom:26px;}
+.section-title{font-size:12px;font-weight:700;color:var(--steel);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
 .section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 
 /* ── KPI Grid ── */
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;}
-.kpi-card{background:#fff;border-radius:var(--radius);padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-top:4px solid var(--border);transition:.2s;}
-.kpi-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.1);}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;}
+.kpi-card{background:#fff;border-radius:var(--radius);padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-top:4px solid var(--border);cursor:pointer;transition:.2s;user-select:none;}
+.kpi-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.12);}
+.kpi-card.active-filter{box-shadow:0 0 0 3px var(--orange);transform:translateY(-3px);}
 .kpi-card.c-navy {border-top-color:var(--navy);}
 .kpi-card.c-blue {border-top-color:#2563EB;}
 .kpi-card.c-orange{border-top-color:var(--orange);}
 .kpi-card.c-red  {border-top-color:#DC2626;}
 .kpi-card.c-green{border-top-color:var(--green);}
 .kpi-card.c-yellow{border-top-color:#F59E0B;}
-.kpi-label{font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
-.kpi-value{font-size:32px;font-weight:800;color:var(--navy);line-height:1;}
-.kpi-value.sm{font-size:22px;}
-.kpi-sub{font-size:11px;color:#aaa;margin-top:5px;}
-.kpi-trend{font-size:11px;margin-top:5px;font-weight:600;}
-.trend-up{color:var(--green);}
-.trend-dn{color:var(--red);}
+.kpi-label{font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.kpi-value{font-size:30px;font-weight:800;color:var(--navy);line-height:1;}
+.kpi-hint{font-size:10px;color:#bbb;margin-top:5px;}
+
+/* ── Charts ── */
+.charts-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+@media(max-width:900px){.charts-row{grid-template-columns:1fr 1fr;}}
+@media(max-width:580px){.charts-row{grid-template-columns:1fr;}}
+.chart-card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.chart-title{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:12px;}
+.chart-sub{font-size:10px;color:#aaa;margin-top:0;margin-bottom:12px;}
+.chart-wrap{position:relative;height:190px;}
 
 /* ── Financial Cards ── */
-.fin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
-.fin-card{background:#fff;border-radius:var(--radius);padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:6px;}
-.fin-card .fin-icon{font-size:28px;}
-.fin-card .fin-label{font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
-.fin-card .fin-value{font-size:26px;font-weight:800;line-height:1.1;}
-.fin-card .fin-sub{font-size:11px;color:#aaa;}
-.fin-card.positive .fin-value{color:var(--green);}
-.fin-card.negative .fin-value{color:var(--red);}
-.fin-card.neutral  .fin-value{color:var(--navy);}
-.fin-card.warning  .fin-value{color:var(--orange);}
+.fin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;}
+.fin-card{background:#fff;border-radius:var(--radius);padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:4px;}
+.fin-icon{font-size:24px;margin-bottom:4px;}
+.fin-label{font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.fin-value{font-size:24px;font-weight:800;line-height:1.1;}
+.fin-sub{font-size:11px;color:#aaa;}
+.fin-card.c-pos .fin-value{color:var(--green);}
+.fin-card.c-neg .fin-value{color:var(--red);}
+.fin-card.c-net .fin-value{color:var(--navy);}
+.fin-card.c-warn .fin-value{color:var(--orange);}
 
-/* ── Progress Section ── */
-.progress-overview{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:14px;}
-.progress-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+/* ── Financial Calculator ── */
+.calc-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+@media(max-width:580px){.calc-grid{grid-template-columns:1fr;}}
+.calc-field label{font-size:11px;font-weight:700;color:var(--steel);display:block;margin-bottom:5px;}
+.calc-field input{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text);outline:none;transition:.15s;}
+.calc-field input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,119,34,.1);}
+.calc-field .hint{font-size:10px;color:#aaa;margin-top:4px;}
+.pl-result{background:var(--light);border-radius:10px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;}
+.pl-item{text-align:center;}
+.pl-item-label{font-size:10px;color:#888;font-weight:600;text-transform:uppercase;margin-bottom:4px;}
+.pl-item-value{font-size:20px;font-weight:800;}
+.pl-item.income .pl-item-value{color:var(--green);}
+.pl-item.cost   .pl-item-value{color:var(--red);}
+.pl-item.net.positive .pl-item-value{color:var(--green);}
+.pl-item.net.negative .pl-item-value{color:var(--red);}
+.pl-item.net .pl-item-value{color:var(--navy);}
+.pl-divider{width:1px;background:var(--border);}
+
+/* ── Progress ── */
+.progress-overview{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:12px;}
+.progress-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
 .progress-header h3{font-size:14px;font-weight:700;color:var(--navy);}
-.progress-pct{font-size:28px;font-weight:800;color:var(--orange);}
-.progress-bar-wrap{background:var(--gray);border-radius:100px;height:14px;overflow:hidden;margin-bottom:8px;}
-.progress-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--orange),var(--orange-l));transition:width .6s ease;}
-.progress-legend{display:flex;gap:16px;font-size:11px;color:#888;}
-.progress-legend span{display:flex;align-items:center;gap:4px;}
-.dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+.progress-pct{font-size:30px;font-weight:800;color:var(--orange);}
+.progress-bar-wrap{background:var(--gray);border-radius:100px;height:12px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--orange),var(--orange-l));transition:width .7s cubic-bezier(.4,0,.2,1);}
+.progress-legend{display:flex;gap:14px;font-size:11px;color:#888;}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:3px;}
 
-.dept-progress-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
-.dept-prog-card{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 2px 6px rgba(0,0,0,.05);}
-.dept-prog-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.dept-prog-name{font-size:13px;font-weight:700;color:var(--navy);}
-.dept-prog-count{font-size:11px;color:#888;}
-.dept-action-bar{display:flex;height:8px;border-radius:100px;overflow:hidden;gap:2px;margin-bottom:6px;}
-.dept-action-bar .seg{height:100%;border-radius:100px;transition:.4s;}
+.dept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;}
+.dept-card{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 2px 6px rgba(0,0,0,.05);cursor:pointer;transition:.2s;border:2px solid transparent;}
+.dept-card:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:0 5px 16px rgba(0,0,0,.1);}
+.dept-card-hint{font-size:10px;color:var(--orange);text-align:center;margin-top:6px;opacity:0;}
+.dept-card:hover .dept-card-hint{opacity:1;}
+.dept-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.dept-name{font-size:13px;font-weight:700;color:var(--navy);}
+.dept-count{font-size:11px;color:#888;}
+.dept-action-bar{display:flex;height:7px;border-radius:100px;overflow:hidden;gap:2px;margin-bottom:6px;}
 .seg-move {background:#2563EB;}
 .seg-sell {background:var(--orange);}
 .seg-scrap{background:#DC2626;}
 .seg-new  {background:var(--green);}
 .seg-none {background:#E5E7EB;}
-.dept-action-legend{display:flex;gap:8px;flex-wrap:wrap;}
-.dept-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;}
+.dept-badges{display:flex;gap:5px;flex-wrap:wrap;}
+.db{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;}
 .db-move {background:#DBEAFE;color:#1D40AE;}
 .db-sell {background:#FEF3C7;color:#92400E;}
 .db-scrap{background:#FEE2E2;color:#991B1B;}
 .db-new  {background:var(--green-l);color:var(--green);}
 .db-none {background:#F3F4F6;color:#6B7280;}
 
-/* ── Charts Row ── */
-.charts-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
-@media(max-width:900px){.charts-row{grid-template-columns:1fr 1fr;}}
-@media(max-width:600px){.charts-row{grid-template-columns:1fr;}}
-.chart-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.chart-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:16px;}
-.chart-wrap{position:relative;height:200px;}
+/* ── Risk ── */
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px;}
+.risk-type-card{background:#fff;border-radius:10px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.05);display:flex;align-items:center;gap:10px;border-left:4px solid #DC2626;cursor:pointer;transition:.2s;}
+.risk-type-card:hover{background:var(--red-l);transform:translateX(4px);}
+.risk-type-card.selected{background:var(--red-l);border-left-color:var(--red);box-shadow:0 0 0 2px var(--red);}
+.risk-type-icon{font-size:22px;flex-shrink:0;}
+.risk-type-info{flex:1;min-width:0;}
+.risk-type-label{font-size:11px;color:#555;line-height:1.3;}
+.risk-type-count{font-size:22px;font-weight:800;color:var(--red);flex-shrink:0;}
+.risk-drill-panel{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-top:14px;display:none;}
+.risk-drill-panel.open{display:block;}
+.risk-drill-title{font-size:13px;font-weight:700;color:var(--red);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
 
-/* ── Department Breakdown Table ── */
-.dept-table-wrap{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow-x:auto;}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-th{background:var(--light);color:var(--navy);font-weight:700;padding:10px 14px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
-th.num{text-align:center;}
-td{padding:10px 14px;border-bottom:1px solid var(--border);color:#333;vertical-align:middle;}
-td.num{text-align:center;}
-tr:hover td{background:#FAFBFF;}
-tr:last-child td{border-bottom:none;}
-.total-row td{font-weight:700;color:var(--navy);background:#F8FAFF;border-top:2px solid var(--border);}
-.bar-cell{display:flex;align-items:center;gap:8px;}
-.mini-bar{flex:1;height:6px;background:var(--gray);border-radius:100px;overflow:hidden;}
-.mini-bar-fill{height:100%;background:linear-gradient(90deg,#2563EB,var(--orange));border-radius:100px;}
-
-/* ── Risk Matrix ── */
-.risk-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px;}
-.risk-type-card{background:#fff;border-radius:10px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px;border-left:4px solid #DC2626;}
-.risk-type-icon{font-size:24px;}
-.risk-type-label{font-size:12px;color:#555;line-height:1.3;}
-.risk-type-count{font-size:24px;font-weight:800;color:var(--red);margin-left:auto;}
-
-.risk-machine-table{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow-x:auto;}
-.risk-flag-pill{display:inline-flex;align-items:center;gap:3px;background:var(--red-l);color:var(--red);padding:2px 7px;border-radius:100px;font-size:10px;font-weight:700;margin:1px;}
-
-/* ── Detail Table ── */
-.table-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.table-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px;}
+/* ── Tables ── */
+.table-card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.table-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;}
 .table-title{font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px;}
-.filter-wrap{display:flex;gap:8px;flex-wrap:wrap;}
-.filter-btn{background:var(--gray);border:none;padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;color:#555;transition:.15s;}
+.filter-wrap{display:flex;gap:6px;flex-wrap:wrap;}
+.filter-btn{background:var(--gray);border:none;padding:5px 12px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;color:#555;transition:.15s;}
 .filter-btn:hover{background:var(--border);}
 .filter-btn.active{background:var(--navy);color:#fff;}
-.search-input{border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;width:200px;font-family:inherit;outline:none;}
+.search-input{border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;width:190px;font-family:inherit;outline:none;}
 .search-input:focus{border-color:var(--orange);}
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:var(--light);color:var(--navy);font-weight:700;padding:9px 12px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
+th.r{text-align:right;}
+td{padding:9px 12px;border-bottom:1px solid var(--border);color:#333;vertical-align:middle;}
+td.r{text-align:right;}
+tr:hover td{background:#FAFBFF;}
+tr:last-child td{border-bottom:none;}
+.total-row td{font-weight:700;background:#F5F8FF;border-top:2px solid var(--border);}
+.mini-bar{display:inline-block;height:5px;border-radius:100px;vertical-align:middle;margin-right:4px;}
+.count-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;}
+.no-data{text-align:center;padding:40px;color:#bbb;}
 
-.badge{display:inline-flex;align-items:center;gap:3px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;}
+/* ── Badges ── */
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:700;}
 .badge-move {background:#DBEAFE;color:#1D40AE;}
 .badge-sell {background:#FEF3C7;color:#92400E;}
 .badge-scrap{background:#FEE2E2;color:#991B1B;}
 .badge-new  {background:var(--green-l);color:var(--green);}
 .badge-other{background:#F3F4F6;color:#374151;}
-.cond{display:inline-block;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:700;}
+.cond{display:inline-block;padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700;}
 .cond-ดีมาก{background:#D1FAE5;color:#065F46;}
 .cond-ดี   {background:#DBEAFE;color:#1E40AF;}
 .cond-พอใช้{background:var(--yellow-l);color:var(--yellow);}
 .cond-เสื่อมสภาพ{background:var(--red-l);color:var(--red);}
 .cond-รอซ่อม{background:#FEE2E2;color:#991B1B;}
-.count-badge{background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;}
-.no-data{text-align:center;padding:40px;color:#aaa;}
-.empty-banner{background:var(--yellow-l);border:1px solid #F3C623;border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--yellow);}
+.risk-pill{background:var(--red-l);color:var(--red);padding:2px 6px;border-radius:100px;font-size:10px;font-weight:700;display:inline-flex;align-items:center;gap:2px;margin:1px;}
+
+/* ── Modal ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.2s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:700px;max-height:85vh;display:flex;flex-direction:column;transform:translateY(20px);transition:.25s;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-header{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.modal-header h2{font-size:16px;font-weight:700;color:var(--navy);}
+.modal-close{background:var(--gray);border:none;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;}
+.modal-close:hover{background:var(--border);}
+.modal-body{padding:18px 20px;overflow-y:auto;}
+.modal-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.modal-stat{background:var(--light);border-radius:8px;padding:10px 14px;text-align:center;flex:1;min-width:80px;}
+.modal-stat-val{font-size:20px;font-weight:800;color:var(--navy);}
+.modal-stat-lbl{font-size:10px;color:#888;font-weight:600;text-transform:uppercase;}
+
+/* ── Empty Banner ── */
+.empty-banner{background:var(--yellow-l);border:1px solid #F3C623;border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--yellow);}
 .empty-banner strong{display:block;font-size:14px;margin-bottom:2px;}
 
 /* ── Tab Sections ── */
 .tab-section{display:none;}
 .tab-section.active{display:block;}
 
-@media(max-width:600px){
+@media(max-width:580px){
+  main{padding:14px 10px;}
+  .header{padding:10px 14px;}
+  .header-text h1{font-size:14px;}
   .fin-grid{grid-template-columns:1fr 1fr;}
-  .header{padding:12px 16px;}
-  .header-text h1{font-size:15px;}
-  main{padding:16px 12px;}
 }
 </style>
 </head>
@@ -203,11 +243,17 @@ tr:last-child td{border-bottom:none;}
 </div>
 
 <div class="nav-tabs">
-  <div class="nav-tab active" onclick="switchTab('overview')">📊 ภาพรวม</div>
-  <div class="nav-tab" onclick="switchTab('financial')">💰 Financial</div>
-  <div class="nav-tab" onclick="switchTab('progress')">📈 Progress</div>
-  <div class="nav-tab" onclick="switchTab('risk')">⚠️ Risk</div>
-  <div class="nav-tab" onclick="switchTab('detail')">📋 รายละเอียด</div>
+  <div class="nav-tab active" onclick="switchTab('overview',this)">📊 ภาพรวม</div>
+  <div class="nav-tab" onclick="switchTab('financial',this)">💰 Financial</div>
+  <div class="nav-tab" onclick="switchTab('progress',this)">📈 Progress</div>
+  <div class="nav-tab" onclick="switchTab('risk',this)">⚠️ Risk</div>
+  <div class="nav-tab" onclick="switchTab('detail',this)">📋 รายละเอียด</div>
+</div>
+
+<div id="filterBanner">
+  <span>🔍</span>
+  <span id="filterBannerText"></span>
+  <span onclick="clearFilter()">✕ ล้าง Filter</span>
 </div>
 
 <div id="loadingWrap" class="loading-wrap">
@@ -218,129 +264,200 @@ tr:last-child td{border-bottom:none;}
   <div class="error-icon">⚠️</div>
   <h2>ไม่สามารถโหลดข้อมูลได้</h2>
   <code id="errorUrl"></code>
-  <p style="margin-top:8px;color:#999;font-size:12px" id="errorMsg"></p>
+  <p style="margin-top:6px;color:#999;font-size:12px" id="errorMsg"></p>
 </div>
 
 <main id="mainContent" style="display:none">
 <div id="emptyBanner" class="empty-banner" style="display:none">
-  <span style="font-size:24px">📋</span>
+  <span style="font-size:22px">📋</span>
   <div><strong>ยังไม่มีข้อมูลการสำรวจ</strong>ให้ทีมสนามกรอกข้อมูลผ่าน Survey Form แล้วกลับมาดูที่นี่</div>
 </div>
 
-<!-- ═══════════════════ TAB: OVERVIEW ═══════════════════ -->
+<!-- ══════════ TAB: OVERVIEW ══════════ -->
 <div id="tab-overview" class="tab-section active">
-
   <div class="section">
-    <div class="section-title">📊 สรุปการสำรวจ</div>
+    <div class="section-title">📊 สรุปการสำรวจ <span style="font-size:10px;color:var(--orange);font-weight:400;text-transform:none;letter-spacing:0">คลิกการ์ดเพื่อกรองข้อมูล</span></div>
     <div class="kpi-grid">
-      <div class="kpi-card c-navy"><div class="kpi-label">📋 สำรวจแล้ว</div><div class="kpi-value" id="kpiTotal">0</div><div class="kpi-sub">เครื่องจักรทั้งหมด</div></div>
-      <div class="kpi-card c-blue"><div class="kpi-label">🚚 MOVE</div><div class="kpi-value" id="kpiMove">0</div><div class="kpi-sub">ย้ายไปโรงงานใหม่</div></div>
-      <div class="kpi-card c-orange"><div class="kpi-label">💰 SELL</div><div class="kpi-value" id="kpiSell">0</div><div class="kpi-sub">ขายออก</div></div>
-      <div class="kpi-card c-red"><div class="kpi-label">🗑️ SCRAP</div><div class="kpi-value" id="kpiScrap">0</div><div class="kpi-sub">ทิ้ง/ซาก</div></div>
-      <div class="kpi-card c-green"><div class="kpi-label">✨ NEW</div><div class="kpi-value" id="kpiNew">0</div><div class="kpi-sub">จัดซื้อใหม่</div></div>
-      <div class="kpi-card c-yellow"><div class="kpi-label">⚠️ RISK</div><div class="kpi-value" id="kpiRisk">0</div><div class="kpi-sub">มี Risk Flag</div></div>
+      <div class="kpi-card c-navy" onclick="filterFromKPI('ALL')">
+        <div class="kpi-label">📋 สำรวจแล้ว</div>
+        <div class="kpi-value" id="kpiTotal">0</div>
+        <div class="kpi-hint">ดูทั้งหมด →</div>
+      </div>
+      <div class="kpi-card c-blue" onclick="filterFromKPI('MOVE')">
+        <div class="kpi-label">🚚 MOVE</div>
+        <div class="kpi-value" id="kpiMove">0</div>
+        <div class="kpi-hint">คลิกดูรายการ →</div>
+      </div>
+      <div class="kpi-card c-orange" onclick="filterFromKPI('SELL')">
+        <div class="kpi-label">💰 SELL</div>
+        <div class="kpi-value" id="kpiSell">0</div>
+        <div class="kpi-hint">คลิกดูรายการ →</div>
+      </div>
+      <div class="kpi-card c-red" onclick="filterFromKPI('SCRAP')">
+        <div class="kpi-label">🗑️ SCRAP</div>
+        <div class="kpi-value" id="kpiScrap">0</div>
+        <div class="kpi-hint">คลิกดูรายการ →</div>
+      </div>
+      <div class="kpi-card c-green" onclick="filterFromKPI('NEW')">
+        <div class="kpi-label">✨ NEW</div>
+        <div class="kpi-value" id="kpiNew">0</div>
+        <div class="kpi-hint">คลิกดูรายการ →</div>
+      </div>
+      <div class="kpi-card c-yellow" onclick="filterFromKPI('RISK')">
+        <div class="kpi-label">⚠️ RISK</div>
+        <div class="kpi-value" id="kpiRisk">0</div>
+        <div class="kpi-hint">คลิกดูรายการ →</div>
+      </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">📉 วิเคราะห์ข้อมูล</div>
+    <div class="section-title">📉 วิเคราะห์ข้อมูล <span style="font-size:10px;color:var(--orange);font-weight:400;text-transform:none;letter-spacing:0">คลิก Chart เพื่อ Filter</span></div>
     <div class="charts-row">
-      <div class="chart-card"><div class="chart-title">📊 Action Breakdown</div><div class="chart-wrap"><canvas id="actionChart"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">🔧 สภาพเครื่องจักร</div><div class="chart-wrap"><canvas id="conditionChart"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">🏢 แผนก Top 8</div><div class="chart-wrap"><canvas id="deptChart"></canvas></div></div>
+      <div class="chart-card">
+        <div class="chart-title">📊 Action Breakdown</div>
+        <div class="chart-sub">คลิกส่วนของ Chart เพื่อกรองข้อมูล</div>
+        <div class="chart-wrap"><canvas id="actionChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">🔧 สภาพเครื่องจักร</div>
+        <div class="chart-sub">คลิก Bar เพื่อดูเครื่องในสภาพนั้น</div>
+        <div class="chart-wrap"><canvas id="conditionChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">🏢 แผนก Top 8</div>
+        <div class="chart-sub">คลิกเพื่อ Drill-down แผนก</div>
+        <div class="chart-wrap"><canvas id="deptChart"></canvas></div>
+      </div>
     </div>
   </div>
+</div>
 
-</div><!-- /overview -->
-
-<!-- ═══════════════════ TAB: FINANCIAL ═══════════════════ -->
+<!-- ══════════ TAB: FINANCIAL ══════════ -->
 <div id="tab-financial" class="tab-section">
-
   <div class="section">
     <div class="section-title">💰 สรุป Financial Impact</div>
     <div class="fin-grid">
-      <div class="fin-card neutral">
+      <div class="fin-card c-net">
         <div class="fin-icon">📦</div>
         <div class="fin-label">มูลค่าทรัพย์สินรวม</div>
         <div class="fin-value" id="finTotal">฿0</div>
         <div class="fin-sub">Book Value ทั้งหมดที่สำรวจ</div>
       </div>
-      <div class="fin-card positive">
+      <div class="fin-card c-pos">
         <div class="fin-icon">💚</div>
         <div class="fin-label">คาดรับจากการขาย (SELL)</div>
         <div class="fin-value" id="finSell">฿0</div>
-        <div class="fin-sub" id="finSellCount">จาก 0 เครื่อง</div>
+        <div class="fin-sub" id="finSellSub">จาก 0 เครื่อง</div>
       </div>
-      <div class="fin-card negative">
+      <div class="fin-card c-neg">
         <div class="fin-icon">📉</div>
         <div class="fin-label">Write-off (SCRAP)</div>
         <div class="fin-value" id="finScrap">฿0</div>
-        <div class="fin-sub" id="finScrapCount">จาก 0 เครื่อง</div>
+        <div class="fin-sub" id="finScrapSub">จาก 0 เครื่อง</div>
       </div>
-      <div class="fin-card warning">
+      <div class="fin-card c-warn">
         <div class="fin-icon">🛒</div>
         <div class="fin-label">ต้องจัดซื้อใหม่ (NEW)</div>
         <div class="fin-value" id="finNew">0 เครื่อง</div>
-        <div class="fin-sub">ยังไม่ทราบราคา — ต้องประเมินเพิ่ม</div>
+        <div class="fin-sub">ต้องประเมินราคาเพิ่มเติม</div>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">📊 สัดส่วนมูลค่าทรัพย์สินตาม Action</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-      <div class="chart-card"><div class="chart-title">มูลค่า (฿) แยกตาม Action</div><div class="chart-wrap"><canvas id="finActionChart"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">มูลค่าแยกตามสภาพ (Condition)</div><div class="chart-wrap"><canvas id="finCondChart"></canvas></div></div>
+    <div class="section-title">🧮 Financial Calculator — ประมาณการ Net P&L</div>
+    <div class="calc-card">
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label>💸 ค่าขนส่ง + ติดตั้ง ต่อเครื่อง (฿)</label>
+          <input type="number" id="costPerMachine" value="15000" min="0" step="1000" oninput="calcPL()">
+          <div class="hint">เฉลี่ยค่าขนส่ง ค่า Rigger + ค่าติดตั้งใหม่</div>
+        </div>
+        <div class="calc-field">
+          <label>📊 % มูลค่าที่คาดขาย SELL ได้จริง (%)</label>
+          <input type="number" id="sellPct" value="60" min="0" max="100" step="5" oninput="calcPL()">
+          <div class="hint">ส่วนใหญ่ขายมือสองได้ 40–70% ของ Book Value</div>
+        </div>
+        <div class="calc-field">
+          <label>🔧 ค่า Recalibrate + Debug ต่อเครื่อง MOVE (฿)</label>
+          <input type="number" id="calibratePerMachine" value="5000" min="0" step="500" oninput="calcPL()">
+          <div class="hint">ค่าปรับตั้งเครื่องหลังย้าย</div>
+        </div>
+        <div class="calc-field">
+          <label>🏗️ ค่า Foundation / Anchor ต่อเครื่อง (฿)</label>
+          <input type="number" id="foundationCost" value="20000" min="0" step="1000" oninput="calcPL()">
+          <div class="hint">เฉพาะเครื่องที่ติด Foundation/Anchor Flag</div>
+        </div>
+      </div>
+      <div class="pl-result" id="plResult">
+        <div class="pl-item income">
+          <div class="pl-item-label">💚 รายรับจาก SELL</div>
+          <div class="pl-item-value" id="plIncome">฿0</div>
+        </div>
+        <div class="pl-item cost">
+          <div class="pl-item-label">🔴 ค่าใช้จ่าย MOVE</div>
+          <div class="pl-item-value" id="plCost">฿0</div>
+        </div>
+        <div class="pl-item cost">
+          <div class="pl-item-label">📉 Write-off SCRAP</div>
+          <div class="pl-item-value" id="plWriteoff">฿0</div>
+        </div>
+        <div class="pl-item net" id="plNetItem">
+          <div class="pl-item-label">⚖️ Net P&L ประมาณการ</div>
+          <div class="pl-item-value" id="plNet">฿0</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">🏭 มูลค่าตามแผนก</div>
-    <div class="dept-table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>แผนก</th>
-            <th class="num">เครื่อง</th>
-            <th class="num">🚚 MOVE</th>
-            <th class="num">💰 SELL</th>
-            <th class="num">🗑️ SCRAP</th>
-            <th class="num">✨ NEW</th>
-            <th>Book Value รวม</th>
-            <th>คาดรับ (SELL)</th>
-          </tr>
-        </thead>
-        <tbody id="finDeptTable"></tbody>
-      </table>
+    <div class="section-title">🏭 มูลค่าและ Action แยกแผนก</div>
+    <div class="table-card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>แผนก</th>
+              <th class="r">เครื่อง</th>
+              <th class="r">🚚 MOVE</th>
+              <th class="r">💰 SELL</th>
+              <th class="r">🗑️ SCRAP</th>
+              <th class="r">✨ NEW</th>
+              <th>Book Value</th>
+              <th>คาดรับ SELL</th>
+            </tr>
+          </thead>
+          <tbody id="finDeptTable"></tbody>
+        </table>
+      </div>
     </div>
   </div>
+</div>
 
-</div><!-- /financial -->
-
-<!-- ═══════════════════ TAB: PROGRESS ═══════════════════ -->
+<!-- ══════════ TAB: PROGRESS ══════════ -->
 <div id="tab-progress" class="tab-section">
-
   <div class="section">
-    <div class="section-title">📈 ความคืบหน้าการสำรวจ</div>
+    <div class="section-title">📈 ภาพรวมความคืบหน้า</div>
     <div class="progress-overview">
       <div class="progress-header">
         <div>
           <h3>ตัดสินใจแล้ว vs ยังรอ</h3>
-          <div style="font-size:12px;color:#888;margin-top:4px" id="progressSubtitle">— จาก 0 เครื่องที่สำรวจ</div>
+          <div style="font-size:12px;color:#888;margin-top:3px" id="progressSubtitle">—</div>
         </div>
         <div class="progress-pct" id="progressPct">0%</div>
       </div>
       <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
       <div class="progress-legend">
-        <span><span class="dot" style="background:var(--orange)"></span> ตัดสินใจแล้ว (<span id="progressDone">0</span>)</span>
-        <span><span class="dot" style="background:#E5E7EB"></span> รอตัดสินใจ (<span id="progressPending">0</span>)</span>
+        <span><span class="dot" style="background:var(--orange)"></span>ตัดสินใจแล้ว (<span id="progressDone">0</span>)</span>
+        <span><span class="dot" style="background:#E5E7EB"></span>รอตัดสินใจ (<span id="progressPending">0</span>)</span>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">🏢 ความคืบหน้าแยกแผนก</div>
-    <div class="dept-progress-grid" id="deptProgressGrid"></div>
+    <div class="section-title">🏢 ความคืบหน้าแยกแผนก <span style="font-size:10px;color:var(--orange);font-weight:400;text-transform:none;letter-spacing:0">คลิกเพื่อดูรายละเอียดแผนก</span></div>
+    <div class="dept-grid" id="deptProgressGrid"></div>
   </div>
 
   <div class="section">
@@ -352,30 +469,36 @@ tr:last-child td{border-bottom:none;}
       </table>
     </div>
   </div>
+</div>
 
-</div><!-- /progress -->
-
-<!-- ═══════════════════ TAB: RISK ═══════════════════ -->
+<!-- ══════════ TAB: RISK ══════════ -->
 <div id="tab-risk" class="tab-section">
-
   <div class="section">
-    <div class="section-title">⚠️ Risk Summary แยกตามประเภท</div>
-    <div class="risk-summary-grid" id="riskSummaryGrid"></div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">🔴 เครื่องจักรที่มี Risk Flag</div>
-    <div class="risk-machine-table">
-      <table>
-        <thead><tr><th>#</th><th>เครื่องจักร</th><th>แผนก</th><th>Action</th><th>สภาพ</th><th>Risk Flags</th></tr></thead>
-        <tbody id="riskTable"></tbody>
-      </table>
+    <div class="section-title">⚠️ Risk แยกตามประเภท <span style="font-size:10px;color:var(--orange);font-weight:400;text-transform:none;letter-spacing:0">คลิก Card เพื่อดูเครื่องที่มี Risk นั้น</span></div>
+    <div class="risk-grid" id="riskSummaryGrid"></div>
+    <div class="risk-drill-panel" id="riskDrillPanel">
+      <div class="risk-drill-title" id="riskDrillTitle"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>เครื่องจักร</th><th>แผนก</th><th>Action</th><th>สภาพ</th><th>Risk Flags ทั้งหมด</th></tr></thead>
+          <tbody id="riskDrillTable"></tbody>
+        </table>
+      </div>
     </div>
   </div>
 
-</div><!-- /risk -->
+  <div class="section">
+    <div class="section-title">🔴 เครื่องจักรทั้งหมดที่มี Risk Flag</div>
+    <div class="table-card">
+      <table>
+        <thead><tr><th>#</th><th>เครื่องจักร</th><th>แผนก</th><th>Action</th><th>สภาพ</th><th>Risk Flags</th></tr></thead>
+        <tbody id="riskAllTable"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<!-- ═══════════════════ TAB: DETAIL ═══════════════════ -->
+<!-- ══════════ TAB: DETAIL ══════════ -->
 <div id="tab-detail" class="tab-section">
   <div class="section">
     <div class="table-card">
@@ -391,86 +514,130 @@ tr:last-child td{border-bottom:none;}
           <button class="filter-btn" data-filter="RISK"  onclick="setFilter(this)">⚠️ RISK</button>
         </div>
       </div>
-      <div class="table-wrap" style="overflow-x:auto;">
+      <div class="table-wrap">
         <table>
-          <thead><tr><th>#</th><th>เครื่องจักร</th><th>แผนก</th><th>Action</th><th>สภาพ</th><th>Risk</th><th>มูลค่า (฿)</th><th>หมายเหตุ</th><th>วันที่</th></tr></thead>
+          <thead><tr><th>#</th><th>เครื่องจักร</th><th>แผนก/อาคาร</th><th>Action</th><th>สภาพ</th><th>Risk</th><th class="r">มูลค่า (฿)</th><th>หมายเหตุ</th><th>วันที่</th></tr></thead>
           <tbody id="tableBody"></tbody>
         </table>
       </div>
     </div>
   </div>
-</div><!-- /detail -->
-
+</div>
 </main>
+
+<!-- ══════════ MODAL ══════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">แผนก —</h2>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-stats" id="modalStats"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>เครื่องจักร</th><th>Action</th><th>สภาพ</th><th class="r">มูลค่า</th><th>Risk</th></tr></thead>
+          <tbody id="modalTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznn80aMHoWfYFF-V6vSeagYaV0dcSlCA4ffObWRJ9cwAzYYwtjGWwZHtif9ks921U/exec';
-
 let allData = [];
 let currentFilter = 'ALL';
+let selectedRiskKey = null;
 let charts = {};
 
 /* ── Field helpers ── */
-const g = (r,...keys) => { for(const k of keys) if(r[k]!==undefined && r[k]!=='') return r[k]; return ''; };
-const getMachineName = r => g(r,'name','machineName','ชื่อเครื่องจักร') || '(ไม่ระบุชื่อ)';
-const getMachineId   = r => g(r,'id','machineId','asset_id');
-const getDept        = r => g(r,'department','dept','แผนก') || 'ไม่ระบุ';
-const getBuilding    = r => g(r,'building','อาคาร');
-const getActionRaw   = r => g(r,'action','Action','การดำเนินการ');
-const getCondition   = r => g(r,'condition','สภาพ','Condition');
-const getNotes       = r => g(r,'note','notes','หมายเหตุ');
-const getTimestamp   = r => g(r,'timestamp','Timestamp','date','surveyDate');
-const getValue       = r => { const v = parseFloat(g(r,'value','มูลค่า','bookValue')||0); return isNaN(v)?0:v; };
+const g = (r,...ks)=>{for(const k of ks)if(r[k]!==undefined&&r[k]!=='')return r[k];return '';};
+const getMachineName = r=>g(r,'name','machineName','ชื่อเครื่องจักร')||'(ไม่ระบุ)';
+const getMachineId   = r=>g(r,'id','machineId','asset_id');
+const getDept        = r=>g(r,'department','dept','แผนก')||'ไม่ระบุ';
+const getBuilding    = r=>g(r,'building','อาคาร');
+const getActionRaw   = r=>g(r,'action','Action');
+const getCondition   = r=>g(r,'condition','สภาพ','Condition');
+const getNotes       = r=>g(r,'note','notes','หมายเหตุ');
+const getTimestamp   = r=>g(r,'timestamp','Timestamp','date','surveyDate');
+const getValue       = r=>{const v=parseFloat(g(r,'value','มูลค่า','bookValue')||0);return isNaN(v)?0:v;};
+const actionKey      = r=>{const a=getActionRaw(r).toUpperCase();return a.startsWith('MOVE')?'MOVE':a.startsWith('SELL')?'SELL':a.startsWith('SCRAP')?'SCRAP':a.startsWith('NEW')?'NEW':'';};
+const getRisksArr    = r=>{const v=r.risks||r.risk||r['Risk Flags']||[];if(Array.isArray(v))return v;const s=String(v).replace(/[\[\]"]/g,'').trim();return s?s.split(/[,/]/).map(x=>x.trim()).filter(Boolean):[];};
+const hasRisk        = r=>getRisksArr(r).length>0;
+const fmtBaht        = n=>n>=1000000?`฿${(n/1000000).toFixed(1)}M`:n>=1000?`฿${(n/1000).toFixed(0)}K`:`฿${n.toLocaleString()}`;
+const fmtDate        = d=>{try{return d?new Date(d).toLocaleDateString('th-TH',{day:'2-digit',month:'short',year:'2-digit'}):'—';}catch{return d||'—';}};
+const esc            = s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const condClass      = c=>'cond cond-'+(c||'').replace(/\s+/g,'');
 
-const actionKey = r => {
-  const a = getActionRaw(r).toUpperCase();
-  if(a.startsWith('MOVE'))  return 'MOVE';
-  if(a.startsWith('SELL'))  return 'SELL';
-  if(a.startsWith('SCRAP')) return 'SCRAP';
-  if(a.startsWith('NEW'))   return 'NEW';
-  return '';
+const RISK_META = {
+  heavy:      {icon:'⚖️', label:'น้ำหนักมาก >500kg'},
+  specialist: {icon:'👨‍🔧',label:'ต้อง Specialist'},
+  foundation: {icon:'⚓', label:'มี Foundation/Anchor'},
+  liquid:     {icon:'💧', label:'มีของเหลวในเครื่อง'},
+  calibrate:  {icon:'🎯', label:'ต้อง Recalibrate'},
+  permit:     {icon:'📄', label:'ต้องขอ Permit ขนส่ง'},
 };
-
-const getRisksArr = r => {
-  const v = r.risks || r.risk || r['Risk Flags'] || [];
-  if(Array.isArray(v)) return v;
-  const s = String(v).replace(/[\[\]"]/g,'').trim();
-  return s ? s.split(/[,/]/).map(x=>x.trim()).filter(Boolean) : [];
-};
-const hasRisk = r => getRisksArr(r).length > 0;
-
-const fmtBaht = n => n>=1000000 ? `฿${(n/1000000).toFixed(1)}M` : n>=1000 ? `฿${(n/1000).toFixed(0)}K` : `฿${n.toLocaleString()}`;
-const fmtDate = d => { try{ return d ? new Date(d).toLocaleDateString('th-TH',{day:'2-digit',month:'short',year:'2-digit'}) : '—'; }catch{return d||'—';} };
-const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
 /* ── Tab switching ── */
-function switchTab(name) {
+function switchTab(name, el) {
   document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
-  event.currentTarget.classList.add('active');
+  if(el) el.classList.add('active');
+}
+
+/* ── Active Filter Banner ── */
+function showFilterBanner(text) {
+  const b=document.getElementById('filterBanner');
+  document.getElementById('filterBannerText').textContent = '🔍 กรองตาม: '+text;
+  b.style.display='flex';
+}
+function hideFilterBanner() {
+  document.getElementById('filterBanner').style.display='none';
+}
+
+/* ── Cross-filter from KPI cards ── */
+function filterFromKPI(key) {
+  document.querySelectorAll('.kpi-card').forEach(c=>c.classList.remove('active-filter'));
+  event.currentTarget.classList.add('active-filter');
+  currentFilter = key;
+  const labels = {ALL:'ทั้งหมด',MOVE:'MOVE ย้าย',SELL:'SELL ขาย',SCRAP:'SCRAP ทิ้ง',NEW:'NEW จัดซื้อ',RISK:'Risk Flag'};
+  if(key !== 'ALL') showFilterBanner(labels[key]||key);
+  else hideFilterBanner();
+  switchTab('detail', document.querySelectorAll('.nav-tab')[4]);
+  renderTable();
+}
+
+function clearFilter() {
+  currentFilter='ALL';
+  hideFilterBanner();
+  document.querySelectorAll('.kpi-card').forEach(c=>c.classList.remove('active-filter'));
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[data-filter="ALL"]').classList.add('active');
+  renderTable();
 }
 
 /* ── Load data ── */
 async function loadData() {
-  const btn = document.getElementById('refreshBtn');
+  const btn=document.getElementById('refreshBtn');
   btn.classList.add('loading'); btn.textContent='⏳ กำลังโหลด...';
   try {
-    const res = await fetch(APPS_SCRIPT_URL+'?action=getData');
+    const res=await fetch(APPS_SCRIPT_URL+'?action=getData');
     if(!res.ok) throw new Error('HTTP '+res.status);
-    const json = await res.json();
-    allData = json.success===false ? [] : (json.data||[]);
-    document.getElementById('emptyBanner').style.display = allData.length===0 ? 'flex' : 'none';
+    const json=await res.json();
+    allData = json.success===false?[]:(json.data||[]);
+    document.getElementById('emptyBanner').style.display = allData.length===0?'flex':'none';
     document.getElementById('loadingWrap').style.display = 'none';
     document.getElementById('errorWrap').style.display   = 'none';
     document.getElementById('mainContent').style.display = 'block';
-    document.getElementById('lastUpdate').textContent = '🕐 '+new Date().toLocaleTimeString('th-TH');
+    document.getElementById('lastUpdate').textContent    = '🕐 '+new Date().toLocaleTimeString('th-TH');
     renderAll();
   } catch(e) {
-    document.getElementById('loadingWrap').style.display = 'none';
-    document.getElementById('errorWrap').style.display   = 'block';
-    document.getElementById('errorUrl').textContent = APPS_SCRIPT_URL+'?action=getData';
-    document.getElementById('errorMsg').textContent = 'Error: '+e.message;
+    document.getElementById('loadingWrap').style.display='none';
+    document.getElementById('errorWrap').style.display='block';
+    document.getElementById('errorUrl').textContent=APPS_SCRIPT_URL+'?action=getData';
+    document.getElementById('errorMsg').textContent='Error: '+e.message;
   } finally {
     btn.classList.remove('loading'); btn.innerHTML='🔄 รีเฟรช';
   }
@@ -484,282 +651,379 @@ function renderAll() {
   renderTable();
 }
 
-/* ══════════════════ OVERVIEW ══════════════════ */
+/* ══════════ OVERVIEW ══════════ */
 function renderOverview() {
-  const countAct = k => allData.filter(r=>actionKey(r)===k).length;
+  const ca=k=>allData.filter(r=>actionKey(r)===k).length;
   document.getElementById('kpiTotal').textContent = allData.length;
-  document.getElementById('kpiMove').textContent  = countAct('MOVE');
-  document.getElementById('kpiSell').textContent  = countAct('SELL');
-  document.getElementById('kpiScrap').textContent = countAct('SCRAP');
-  document.getElementById('kpiNew').textContent   = countAct('NEW');
+  ['MOVE','SELL','SCRAP','NEW'].forEach(k=>document.getElementById('kpi'+k[0]+k.slice(1).toLowerCase()).textContent=ca(k));
   document.getElementById('kpiRisk').textContent  = allData.filter(r=>hasRisk(r)).length;
 
+  // Action doughnut — clickable
   mkChart('actionChart','doughnut',
     ['MOVE','SELL','SCRAP','NEW'],
-    ['MOVE','SELL','SCRAP','NEW'].map(a=>countAct(a)),
-    ['#2563EB','#E87722','#DC2626','#1D6E3F']);
+    ['MOVE','SELL','SCRAP','NEW'].map(k=>ca(k)),
+    ['#2563EB','#E87722','#DC2626','#1D6E3F'],
+    (label)=>filterFromKPIDirect(label)
+  );
 
-  const condMap={};
-  allData.forEach(r=>{const c=getCondition(r)||'ไม่ระบุ'; condMap[c]=(condMap[c]||0)+1;});
-  const conds=Object.entries(condMap).sort((a,b)=>b[1]-a[1]);
-  mkChart('conditionChart','bar',conds.map(c=>c[0]),conds.map(c=>c[1]),
-    ['#1D6E3F','#2563EB','#E87722','#856404','#DC2626','#6B7280']);
+  // Condition bar — clickable → filter by condition (show in detail as search)
+  const cMap={};
+  allData.forEach(r=>{const c=getCondition(r)||'ไม่ระบุ';cMap[c]=(cMap[c]||0)+1;});
+  const conds=Object.entries(cMap).sort((a,b)=>b[1]-a[1]);
+  mkChart('conditionChart','bar',
+    conds.map(c=>c[0]),conds.map(c=>c[1]),
+    ['#1D6E3F','#2563EB','#E87722','#856404','#DC2626','#6B7280'],
+    (label)=>filterByCondition(label)
+  );
 
-  const deptMap={};
-  allData.forEach(r=>{const d=getDept(r); deptMap[d]=(deptMap[d]||0)+1;});
-  const depts=Object.entries(deptMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  mkChart('deptChart','doughnut',depts.map(d=>d[0]),depts.map(d=>d[1]),
-    ['#0D1B2A','#1B3A5C','#E87722','#2563EB','#1D6E3F','#856404','#DC2626','#7C3AED']);
+  // Dept doughnut — clickable → open modal
+  const dMap={};
+  allData.forEach(r=>{const d=getDept(r);dMap[d]=(dMap[d]||0)+1;});
+  const depts=Object.entries(dMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  mkChart('deptChart','doughnut',
+    depts.map(d=>d[0]),depts.map(d=>d[1]),
+    ['#0D1B2A','#1B3A5C','#E87722','#2563EB','#1D6E3F','#856404','#DC2626','#7C3AED'],
+    (label)=>openDeptModal(label)
+  );
 }
 
-/* ══════════════════ FINANCIAL ══════════════════ */
+function filterFromKPIDirect(key) {
+  currentFilter=key;
+  if(key!=='ALL') showFilterBanner(key);
+  else hideFilterBanner();
+  switchTab('detail',document.querySelectorAll('.nav-tab')[4]);
+  renderTable();
+}
+
+function filterByCondition(cond) {
+  document.getElementById('searchInput').value=cond;
+  switchTab('detail',document.querySelectorAll('.nav-tab')[4]);
+  currentFilter='ALL';
+  showFilterBanner('สภาพ: '+cond);
+  renderTable();
+}
+
+/* ══════════ FINANCIAL ══════════ */
 function renderFinancial() {
-  const totalVal = allData.reduce((s,r)=>s+getValue(r),0);
-  const sellMachines = allData.filter(r=>actionKey(r)==='SELL');
-  const scrapMachines= allData.filter(r=>actionKey(r)==='SCRAP');
-  const newCount     = allData.filter(r=>actionKey(r)==='NEW').length;
-  const sellVal  = sellMachines.reduce((s,r)=>s+getValue(r),0);
-  const scrapVal = scrapMachines.reduce((s,r)=>s+getValue(r),0);
+  const totalVal  = allData.reduce((s,r)=>s+getValue(r),0);
+  const sellM     = allData.filter(r=>actionKey(r)==='SELL');
+  const scrapM    = allData.filter(r=>actionKey(r)==='SCRAP');
+  const newCnt    = allData.filter(r=>actionKey(r)==='NEW').length;
+  const sellVal   = sellM.reduce((s,r)=>s+getValue(r),0);
+  const scrapVal  = scrapM.reduce((s,r)=>s+getValue(r),0);
 
-  document.getElementById('finTotal').textContent = fmtBaht(totalVal);
-  document.getElementById('finSell').textContent  = fmtBaht(sellVal);
-  document.getElementById('finSellCount').textContent  = `จาก ${sellMachines.length} เครื่อง`;
-  document.getElementById('finScrap').textContent = fmtBaht(scrapVal);
-  document.getElementById('finScrapCount').textContent = `จาก ${scrapMachines.length} เครื่อง`;
-  document.getElementById('finNew').textContent   = newCount+' เครื่อง';
+  document.getElementById('finTotal').textContent  = fmtBaht(totalVal);
+  document.getElementById('finSell').textContent   = fmtBaht(sellVal);
+  document.getElementById('finSellSub').textContent= `จาก ${sellM.length} เครื่อง`;
+  document.getElementById('finScrap').textContent  = fmtBaht(scrapVal);
+  document.getElementById('finScrapSub').textContent=`จาก ${scrapM.length} เครื่อง`;
+  document.getElementById('finNew').textContent    = newCnt+' เครื่อง';
 
-  // Chart: value by action
-  const actKeys=['MOVE','SELL','SCRAP','NEW'];
-  const actVals=actKeys.map(k=>allData.filter(r=>actionKey(r)===k).reduce((s,r)=>s+getValue(r),0));
-  mkChart('finActionChart','doughnut',actKeys,actVals,['#2563EB','#E87722','#DC2626','#1D6E3F']);
+  calcPL();
 
-  // Chart: value by condition
-  const cMap={};
-  allData.forEach(r=>{const c=getCondition(r)||'ไม่ระบุ'; cMap[c]=(cMap[c]||0)+getValue(r);});
-  const conds=Object.entries(cMap).sort((a,b)=>b[1]-a[1]);
-  mkChart('finCondChart','bar',conds.map(c=>c[0]),conds.map(c=>c[1]),
-    ['#1D6E3F','#2563EB','#E87722','#856404','#DC2626']);
-
-  // Table: dept breakdown
-  const deptData={};
+  // Dept table
+  const dd={};
   allData.forEach(r=>{
     const d=getDept(r);
-    if(!deptData[d]) deptData[d]={move:0,sell:0,scrap:0,new:0,total:0,totalVal:0,sellVal:0};
+    if(!dd[d]) dd[d]={move:0,sell:0,scrap:0,new:0,total:0,totalVal:0,sellVal:0};
     const ak=actionKey(r);
-    deptData[d][ak.toLowerCase()||'other']=(deptData[d][ak.toLowerCase()||'other']||0)+1;
-    deptData[d].total++;
-    deptData[d].totalVal+=getValue(r);
-    if(ak==='SELL') deptData[d].sellVal+=getValue(r);
+    if(ak) dd[d][ak.toLowerCase()]++;
+    dd[d].total++; dd[d].totalVal+=getValue(r);
+    if(ak==='SELL') dd[d].sellVal+=getValue(r);
   });
-  const depts=Object.entries(deptData).sort((a,b)=>b[1].total-a[1].total);
-  const maxVal=Math.max(...depts.map(d=>d[1].totalVal),1);
-  const totals={move:0,sell:0,scrap:0,new:0,total:0,totalVal:0,sellVal:0};
-  depts.forEach(([,d])=>{Object.keys(totals).forEach(k=>totals[k]+=(d[k]||0));});
+  const rows=Object.entries(dd).sort((a,b)=>b[1].totalVal-a[1].totalVal);
+  const mx=Math.max(...rows.map(d=>d[1].totalVal),1);
+  const tot={move:0,sell:0,scrap:0,new:0,total:0,totalVal:0,sellVal:0};
+  rows.forEach(([,d])=>Object.keys(tot).forEach(k=>tot[k]+=(d[k]||0)));
 
-  document.getElementById('finDeptTable').innerHTML = [
-    ...depts.map(([dept,d])=>`
-      <tr>
-        <td><strong>${esc(dept)}</strong></td>
-        <td class="num">${d.total}</td>
-        <td class="num"><span style="color:#2563EB;font-weight:700">${d.move||0}</span></td>
-        <td class="num"><span style="color:var(--orange);font-weight:700">${d.sell||0}</span></td>
-        <td class="num"><span style="color:#DC2626;font-weight:700">${d.scrap||0}</span></td>
-        <td class="num"><span style="color:var(--green);font-weight:700">${d.new||0}</span></td>
+  document.getElementById('finDeptTable').innerHTML=[
+    ...rows.map(([dept,d])=>`
+      <tr style="cursor:pointer" onclick="openDeptModal('${esc(dept)}')" title="คลิกดูรายละเอียดแผนก ${esc(dept)}">
+        <td><strong style="color:var(--navy)">${esc(dept)}</strong></td>
+        <td class="r">${d.total}</td>
+        <td class="r" style="color:#2563EB;font-weight:700">${d.move||0}</td>
+        <td class="r" style="color:var(--orange);font-weight:700">${d.sell||0}</td>
+        <td class="r" style="color:#DC2626;font-weight:700">${d.scrap||0}</td>
+        <td class="r" style="color:var(--green);font-weight:700">${d.new||0}</td>
         <td>
-          <div class="bar-cell">
-            <div class="mini-bar"><div class="mini-bar-fill" style="width:${d.totalVal/maxVal*100}%"></div></div>
-            <span style="font-size:12px;white-space:nowrap">${fmtBaht(d.totalVal)}</span>
+          <div style="display:flex;align-items:center;gap:6px">
+            <div class="mini-bar" style="width:${Math.round(d.totalVal/mx*80)+20}px;background:linear-gradient(90deg,#2563EB,var(--orange))"></div>
+            <span style="font-size:12px;font-weight:600">${fmtBaht(d.totalVal)}</span>
           </div>
         </td>
-        <td style="color:var(--green);font-weight:600">${fmtBaht(d.sellVal)}</td>
+        <td style="color:var(--green);font-weight:600">${d.sellVal>0?fmtBaht(d.sellVal):'—'}</td>
       </tr>`),
     `<tr class="total-row">
       <td>รวมทั้งหมด</td>
-      <td class="num">${totals.total}</td>
-      <td class="num">${totals.move||0}</td>
-      <td class="num">${totals.sell||0}</td>
-      <td class="num">${totals.scrap||0}</td>
-      <td class="num">${totals.new||0}</td>
-      <td>${fmtBaht(totals.totalVal)}</td>
-      <td style="color:var(--green)">${fmtBaht(totals.sellVal)}</td>
+      <td class="r">${tot.total}</td>
+      <td class="r">${tot.move||0}</td>
+      <td class="r">${tot.sell||0}</td>
+      <td class="r">${tot.scrap||0}</td>
+      <td class="r">${tot.new||0}</td>
+      <td>${fmtBaht(tot.totalVal)}</td>
+      <td style="color:var(--green)">${fmtBaht(tot.sellVal)}</td>
     </tr>`
-  ].join('') || '<tr><td colspan="8" class="no-data">ยังไม่มีข้อมูล</td></tr>';
+  ].join('')||'<tr><td colspan="8" class="no-data">ยังไม่มีข้อมูล</td></tr>';
 }
 
-/* ══════════════════ PROGRESS ══════════════════ */
+function calcPL() {
+  const costPer   = parseFloat(document.getElementById('costPerMachine').value)||0;
+  const sellPct   = parseFloat(document.getElementById('sellPct').value)||0;
+  const calibPer  = parseFloat(document.getElementById('calibratePerMachine').value)||0;
+  const foundPer  = parseFloat(document.getElementById('foundationCost').value)||0;
+
+  const moveMachines = allData.filter(r=>actionKey(r)==='MOVE');
+  const sellMachines = allData.filter(r=>actionKey(r)==='SELL');
+  const scrapMachines= allData.filter(r=>actionKey(r)==='SCRAP');
+  const foundCount   = allData.filter(r=>getRisksArr(r).includes('foundation')).length;
+
+  const income   = sellMachines.reduce((s,r)=>s+getValue(r),0) * (sellPct/100);
+  const moveCost = moveMachines.length * costPer + moveMachines.length * calibPer + foundCount * foundPer;
+  const writeoff = scrapMachines.reduce((s,r)=>s+getValue(r),0);
+  const net      = income - moveCost - writeoff;
+
+  document.getElementById('plIncome').textContent  = fmtBaht(Math.round(income));
+  document.getElementById('plCost').textContent    = fmtBaht(Math.round(moveCost));
+  document.getElementById('plWriteoff').textContent= fmtBaht(Math.round(writeoff));
+  document.getElementById('plNet').textContent     = (net>=0?'+':'')+fmtBaht(Math.round(net));
+  const ni=document.getElementById('plNetItem');
+  ni.className='pl-item net '+(net>=0?'positive':'negative');
+}
+
+/* ══════════ PROGRESS ══════════ */
 function renderProgress() {
-  const decided = allData.filter(r=>actionKey(r)!=='');
-  const pending  = allData.filter(r=>actionKey(r)==='');
-  const pct = allData.length>0 ? Math.round(decided.length/allData.length*100) : 0;
+  const decided=allData.filter(r=>actionKey(r)!=='');
+  const pending =allData.filter(r=>actionKey(r)==='');
+  const pct=allData.length>0?Math.round(decided.length/allData.length*100):0;
 
-  document.getElementById('progressPct').textContent = pct+'%';
-  document.getElementById('progressBar').style.width  = pct+'%';
-  document.getElementById('progressSubtitle').textContent = `${decided.length} จาก ${allData.length} เครื่องที่สำรวจ`;
-  document.getElementById('progressDone').textContent    = decided.length;
-  document.getElementById('progressPending').textContent = pending.length;
+  document.getElementById('progressPct').textContent      = pct+'%';
+  document.getElementById('progressBar').style.width       = pct+'%';
+  document.getElementById('progressSubtitle').textContent  = `${decided.length} จาก ${allData.length} เครื่องที่สำรวจ`;
+  document.getElementById('progressDone').textContent      = decided.length;
+  document.getElementById('progressPending').textContent   = pending.length;
 
-  // Per dept
-  const deptMap={};
+  // Dept cards
+  const dm={};
   allData.forEach(r=>{
     const d=getDept(r);
-    if(!deptMap[d]) deptMap[d]={move:0,sell:0,scrap:0,new:0,none:0,total:0};
+    if(!dm[d]) dm[d]={move:0,sell:0,scrap:0,new:0,none:0,total:0};
     const ak=actionKey(r);
-    deptMap[d][ak.toLowerCase()||'none']++;
-    deptMap[d].total++;
+    dm[d][ak.toLowerCase()||'none']++;
+    dm[d].total++;
   });
-  const depts=Object.entries(deptMap).sort((a,b)=>b[1].total-a[1].total);
+  const depts=Object.entries(dm).sort((a,b)=>b[1].total-a[1].total);
 
-  document.getElementById('deptProgressGrid').innerHTML = depts.map(([dept,d])=>{
+  document.getElementById('deptProgressGrid').innerHTML=depts.map(([dept,d])=>{
     const done=d.move+d.sell+d.scrap+d.new;
     const pct=d.total>0?Math.round(done/d.total*100):0;
-    const w=(k,t)=>t>0?d[k]/t*100:0;
-    return `<div class="dept-prog-card">
-      <div class="dept-prog-header">
-        <div class="dept-prog-name">${esc(dept)}</div>
-        <div class="dept-prog-count">${done}/${d.total} (${pct}%)</div>
+    const w=(k)=>d.total>0?d[k]/d.total*100:0;
+    return `<div class="dept-card" onclick="openDeptModal('${esc(dept)}')">
+      <div class="dept-card-header">
+        <div class="dept-name">${esc(dept)}</div>
+        <div class="dept-count">${done}/${d.total} — ${pct}%</div>
       </div>
       <div class="dept-action-bar">
-        <div class="seg seg-move"  style="width:${w('move',d.total)}%"></div>
-        <div class="seg seg-sell"  style="width:${w('sell',d.total)}%"></div>
-        <div class="seg seg-scrap" style="width:${w('scrap',d.total)}%"></div>
-        <div class="seg seg-new"   style="width:${w('new',d.total)}%"></div>
-        <div class="seg seg-none"  style="width:${w('none',d.total)}%"></div>
+        <div class="seg-move"  style="width:${w('move')}%;height:100%;border-radius:100px"></div>
+        <div class="seg-sell"  style="width:${w('sell')}%;height:100%;border-radius:100px"></div>
+        <div class="seg-scrap" style="width:${w('scrap')}%;height:100%;border-radius:100px"></div>
+        <div class="seg-new"   style="width:${w('new')}%;height:100%;border-radius:100px"></div>
+        <div class="seg-none"  style="width:${w('none')}%;height:100%;border-radius:100px"></div>
       </div>
-      <div class="dept-action-legend">
-        ${d.move  ? `<span class="dept-badge db-move">🚚 ${d.move}</span>` :''}
-        ${d.sell  ? `<span class="dept-badge db-sell">💰 ${d.sell}</span>` :''}
-        ${d.scrap ? `<span class="dept-badge db-scrap">🗑️ ${d.scrap}</span>`:''}
-        ${d.new   ? `<span class="dept-badge db-new">✨ ${d.new}</span>`  :''}
-        ${d.none  ? `<span class="dept-badge db-none">⏳ รอ ${d.none}</span>`:''}
+      <div class="dept-badges">
+        ${d.move  ?`<span class="db db-move">🚚 ${d.move}</span>`:''}
+        ${d.sell  ?`<span class="db db-sell">💰 ${d.sell}</span>`:''}
+        ${d.scrap ?`<span class="db db-scrap">🗑️ ${d.scrap}</span>`:''}
+        ${d.new   ?`<span class="db db-new">✨ ${d.new}</span>`:''}
+        ${d.none  ?`<span class="db db-none">⏳ รอ ${d.none}</span>`:''}
       </div>
+      <div class="dept-card-hint">📋 คลิกดูรายละเอียด</div>
     </div>`;
-  }).join('') || '<p style="color:#aaa;font-size:13px">ยังไม่มีข้อมูล</p>';
+  }).join('')||'<p style="color:#aaa;font-size:13px">ยังไม่มีข้อมูล</p>';
 
   // Pending table
-  document.getElementById('pendingTable').innerHTML = pending.length===0
-    ? `<tr><td colspan="5" class="no-data">✅ ทุกเครื่องตัดสินใจแล้ว!</td></tr>`
-    : pending.map((r,i)=>`
+  document.getElementById('pendingTable').innerHTML=pending.length===0
+    ?'<tr><td colspan="5" class="no-data">✅ ทุกเครื่องตัดสินใจแล้ว!</td></tr>'
+    :pending.map((r,i)=>`
       <tr>
         <td style="color:#aaa;font-size:11px">${i+1}</td>
         <td><strong>${esc(getMachineName(r))}</strong></td>
         <td>${esc(getDept(r))}</td>
-        <td>${getCondition(r)?`<span class="cond cond-${getCondition(r).replace(/\s+/g,'')}">${esc(getCondition(r))}</span>`:'—'}</td>
-        <td style="font-size:12px;color:#666">${esc(getNotes(r).slice(0,60))}</td>
+        <td>${getCondition(r)?`<span class="${condClass(getCondition(r))}">${esc(getCondition(r))}</span>`:'—'}</td>
+        <td style="font-size:12px;color:#666">${esc((getNotes(r)||'').slice(0,60))||'—'}</td>
       </tr>`).join('');
 }
 
-/* ══════════════════ RISK ══════════════════ */
-const RISK_META = {
-  heavy:     {icon:'⚖️', label:'น้ำหนักมาก >500kg'},
-  specialist:{icon:'👨‍🔧',label:'ต้อง Specialist'},
-  foundation:{icon:'⚓', label:'มี Foundation/Anchor'},
-  liquid:    {icon:'💧', label:'มีของเหลวในเครื่อง'},
-  calibrate: {icon:'🎯', label:'ต้อง Recalibrate'},
-  permit:    {icon:'📄', label:'ต้องขอ Permit ขนส่ง'},
-};
-
+/* ══════════ RISK ══════════ */
 function renderRisk() {
-  const riskMachines = allData.filter(r=>hasRisk(r));
+  const riskM=allData.filter(r=>hasRisk(r));
+  const typeCnt={};
+  riskM.forEach(r=>getRisksArr(r).forEach(k=>{typeCnt[k]=(typeCnt[k]||0)+1;}));
 
-  // Count per type
-  const typeCounts={};
-  riskMachines.forEach(r=>getRisksArr(r).forEach(k=>{typeCounts[k]=(typeCounts[k]||0)+1;}));
+  document.getElementById('riskSummaryGrid').innerHTML=[
+    ...Object.entries(RISK_META).map(([k,m])=>`
+      <div class="risk-type-card${selectedRiskKey===k?' selected':''}" onclick="drillRisk('${k}','${esc(m.icon)} ${esc(m.label)}')">
+        <div class="risk-type-icon">${m.icon}</div>
+        <div class="risk-type-info"><div class="risk-type-label">${m.label}</div></div>
+        <div class="risk-type-count">${typeCnt[k]||0}</div>
+      </div>`),
+    ...Object.keys(typeCnt).filter(k=>!RISK_META[k]).map(k=>`
+      <div class="risk-type-card${selectedRiskKey===k?' selected':''}" onclick="drillRisk('${esc(k)}','⚠️ ${esc(k)}')">
+        <div class="risk-type-icon">⚠️</div>
+        <div class="risk-type-info"><div class="risk-type-label">${esc(k)}</div></div>
+        <div class="risk-type-count">${typeCnt[k]}</div>
+      </div>`)
+  ].join('');
 
-  document.getElementById('riskSummaryGrid').innerHTML = Object.entries(RISK_META).map(([k,m])=>`
-    <div class="risk-type-card">
-      <div class="risk-type-icon">${m.icon}</div>
-      <div class="risk-type-label">${m.label}</div>
-      <div class="risk-type-count">${typeCounts[k]||0}</div>
-    </div>`).join('') +
-    (Object.keys(typeCounts).filter(k=>!RISK_META[k]).map(k=>`
-    <div class="risk-type-card">
-      <div class="risk-type-icon">⚠️</div>
-      <div class="risk-type-label">${esc(k)}</div>
-      <div class="risk-type-count">${typeCounts[k]}</div>
-    </div>`).join(''));
-
-  // Risk machine table
-  document.getElementById('riskTable').innerHTML = riskMachines.length===0
-    ? `<tr><td colspan="6" class="no-data">✅ ไม่มีเครื่องที่มี Risk Flag</td></tr>`
-    : riskMachines.sort((a,b)=>getRisksArr(b).length-getRisksArr(a).length)
-        .map((r,i)=>{
-          const ak=actionKey(r);
-          const cond=getCondition(r);
-          const risks=getRisksArr(r);
-          const pills=risks.map(k=>{
-            const m=RISK_META[k]||{icon:'⚠️',label:k};
-            return `<span class="risk-flag-pill">${m.icon} ${m.label}</span>`;
-          }).join('');
-          return `<tr>
-            <td style="color:#aaa;font-size:11px">${i+1}</td>
-            <td><strong>${esc(getMachineName(r))}</strong>${getMachineId(r)?`<br><span style="font-size:10px;color:#aaa">${esc(getMachineId(r))}</span>`:''}</td>
-            <td>${esc(getDept(r))}</td>
-            <td>${ak?`<span class="badge badge-${ak.toLowerCase()}">${esc(getActionRaw(r))}</span>`:'<span style="color:#ccc">รอ</span>'}</td>
-            <td>${cond?`<span class="cond cond-${cond.replace(/\s+/g,'')}">${esc(cond)}</span>`:'—'}</td>
-            <td>${pills}</td>
-          </tr>`;
-        }).join('');
+  // All risk table
+  document.getElementById('riskAllTable').innerHTML=riskM.length===0
+    ?'<tr><td colspan="6" class="no-data">✅ ไม่มีเครื่องที่มี Risk Flag</td></tr>'
+    :riskM.sort((a,b)=>getRisksArr(b).length-getRisksArr(a).length).map((r,i)=>riskRow(r,i)).join('');
 }
 
-/* ══════════════════ DETAIL TABLE ══════════════════ */
+function drillRisk(key, label) {
+  if(selectedRiskKey===key) {
+    selectedRiskKey=null;
+    document.getElementById('riskDrillPanel').classList.remove('open');
+  } else {
+    selectedRiskKey=key;
+    const machines=allData.filter(r=>getRisksArr(r).includes(key));
+    document.getElementById('riskDrillTitle').textContent=`${label} — ${machines.length} เครื่อง`;
+    document.getElementById('riskDrillTable').innerHTML=machines.length===0
+      ?'<tr><td colspan="6" class="no-data">ไม่มีเครื่องที่มี Risk นี้</td></tr>'
+      :machines.map((r,i)=>riskRow(r,i)).join('');
+    document.getElementById('riskDrillPanel').classList.add('open');
+    document.getElementById('riskDrillPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  renderRisk(); // re-render to update selected state
+  // restore panel state
+  if(selectedRiskKey) {
+    document.getElementById('riskDrillPanel').classList.add('open');
+  }
+}
+
+function riskRow(r,i) {
+  const ak=actionKey(r); const c=getCondition(r);
+  const risks=getRisksArr(r).map(k=>{const m=RISK_META[k]||{icon:'⚠️',label:k};return `<span class="risk-pill">${m.icon} ${m.label}</span>`;}).join('');
+  return `<tr>
+    <td style="color:#aaa;font-size:11px">${i+1}</td>
+    <td><strong>${esc(getMachineName(r))}</strong>${getMachineId(r)?`<br><span style="font-size:10px;color:#aaa">${esc(getMachineId(r))}</span>`:''}</td>
+    <td>${esc(getDept(r))}</td>
+    <td>${ak?`<span class="badge badge-${ak.toLowerCase()}">${esc(getActionRaw(r))}</span>`:'<span style="color:#ccc;font-size:12px">รอ</span>'}</td>
+    <td>${c?`<span class="${condClass(c)}">${esc(c)}</span>`:'—'}</td>
+    <td>${risks}</td>
+  </tr>`;
+}
+
+/* ══════════ DEPARTMENT MODAL ══════════ */
+function openDeptModal(dept) {
+  const rows=allData.filter(r=>getDept(r)===dept);
+  const ca=k=>rows.filter(r=>actionKey(r)===k).length;
+  const totalVal=rows.reduce((s,r)=>s+getValue(r),0);
+
+  document.getElementById('modalTitle').textContent='🏢 '+dept;
+  document.getElementById('modalStats').innerHTML=`
+    <div class="modal-stat"><div class="modal-stat-val">${rows.length}</div><div class="modal-stat-lbl">เครื่องทั้งหมด</div></div>
+    <div class="modal-stat"><div class="modal-stat-val" style="color:#2563EB">${ca('MOVE')}</div><div class="modal-stat-lbl">🚚 MOVE</div></div>
+    <div class="modal-stat"><div class="modal-stat-val" style="color:var(--orange)">${ca('SELL')}</div><div class="modal-stat-lbl">💰 SELL</div></div>
+    <div class="modal-stat"><div class="modal-stat-val" style="color:#DC2626">${ca('SCRAP')}</div><div class="modal-stat-lbl">🗑️ SCRAP</div></div>
+    <div class="modal-stat"><div class="modal-stat-val" style="color:var(--green)">${ca('NEW')}</div><div class="modal-stat-lbl">✨ NEW</div></div>
+    ${totalVal>0?`<div class="modal-stat"><div class="modal-stat-val" style="font-size:16px">${fmtBaht(totalVal)}</div><div class="modal-stat-lbl">Book Value</div></div>`:''}
+  `;
+  document.getElementById('modalTable').innerHTML=rows.length===0
+    ?'<tr><td colspan="6" class="no-data">ไม่มีข้อมูล</td></tr>'
+    :rows.map((r,i)=>{
+      const ak=actionKey(r); const c=getCondition(r); const v=getValue(r);
+      return `<tr>
+        <td style="color:#aaa;font-size:11px">${i+1}</td>
+        <td><strong>${esc(getMachineName(r))}</strong></td>
+        <td>${ak?`<span class="badge badge-${ak.toLowerCase()}">${esc(getActionRaw(r))}</span>`:'<span style="color:#ccc;font-size:12px">รอ</span>'}</td>
+        <td>${c?`<span class="${condClass(c)}">${esc(c)}</span>`:'—'}</td>
+        <td class="r" style="font-size:12px;font-weight:600">${v>0?fmtBaht(v):'—'}</td>
+        <td>${hasRisk(r)?'<span class="risk-pill">⚠️ Risk</span>':'—'}</td>
+      </tr>`;
+    }).join('');
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(e) {
+  if(e.target===document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModalDirect();});
+
+/* ══════════ DETAIL TABLE ══════════ */
 function setFilter(btn) {
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  currentFilter = btn.dataset.filter;
+  currentFilter=btn.dataset.filter;
   renderTable();
 }
 
 function renderTable() {
-  const search = (document.getElementById('searchInput').value||'').toLowerCase();
-  let rows = allData.filter(r=>{
+  const search=(document.getElementById('searchInput').value||'').toLowerCase();
+  let rows=allData.filter(r=>{
     if(currentFilter==='RISK') return hasRisk(r);
     if(currentFilter!=='ALL')  return actionKey(r)===currentFilter;
     return true;
   }).filter(r=>!search||JSON.stringify(r).toLowerCase().includes(search));
 
-  document.getElementById('tableCount').textContent = rows.length;
+  document.getElementById('tableCount').textContent=rows.length;
   const tbody=document.getElementById('tableBody');
   if(rows.length===0){
-    tbody.innerHTML=`<tr><td colspan="9" class="no-data">${allData.length===0?'📋 ยังไม่มีข้อมูล':'ไม่พบข้อมูล'}</td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="9" class="no-data">${allData.length===0?'📋 ยังไม่มีข้อมูล':'ไม่พบรายการที่ค้นหา'}</td></tr>`;
     return;
   }
   tbody.innerHTML=rows.map((r,i)=>{
-    const ak=actionKey(r); const cond=getCondition(r);
-    const v=getValue(r);
+    const ak=actionKey(r); const c=getCondition(r); const v=getValue(r);
     return `<tr>
       <td style="color:#aaa;font-size:11px">${i+1}</td>
       <td><strong>${esc(getMachineName(r))}</strong>${getMachineId(r)?`<br><span style="font-size:10px;color:#aaa">${esc(getMachineId(r))}</span>`:''}</td>
       <td>${esc([getDept(r),getBuilding(r)].filter(Boolean).join(' / ')||'—')}</td>
       <td>${ak?`<span class="badge badge-${ak.toLowerCase()}">${esc(getActionRaw(r))}</span>`:'<span style="color:#ccc;font-size:12px">รอ</span>'}</td>
-      <td>${cond?`<span class="cond cond-${cond.replace(/\s+/g,'')}">${esc(cond)}</span>`:'—'}</td>
-      <td>${hasRisk(r)?'<span style="background:var(--red-l);color:var(--red);padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700">⚠️ RISK</span>':'<span style="color:#ccc">—</span>'}</td>
-      <td style="font-size:12px;font-weight:600;color:${v>0?'var(--navy)':'#ccc'}">${v>0?fmtBaht(v):'—'}</td>
-      <td style="max-width:180px;font-size:12px;color:#666">${esc(getNotes(r).slice(0,60))||'—'}</td>
+      <td>${c?`<span class="${condClass(c)}">${esc(c)}</span>`:'—'}</td>
+      <td>${hasRisk(r)?'<span class="risk-pill">⚠️ Risk</span>':'<span style="color:#ddd">—</span>'}</td>
+      <td class="r" style="font-size:12px;font-weight:600;color:${v>0?'var(--navy)':'#ccc'}">${v>0?fmtBaht(v):'—'}</td>
+      <td style="max-width:160px;font-size:12px;color:#666">${esc((getNotes(r)||'').slice(0,60))||'—'}</td>
       <td style="font-size:11px;color:#999;white-space:nowrap">${fmtDate(getTimestamp(r))}</td>
     </tr>`;
   }).join('');
 }
 
-/* ── Chart helper ── */
-function mkChart(id, type, labels, data, colors) {
+/* ══════════ CHART HELPER ══════════ */
+function mkChart(id, type, labels, data, colors, onClickFn) {
   if(charts[id]) charts[id].destroy();
   const ctx=document.getElementById(id).getContext('2d');
   charts[id]=new Chart(ctx,{
     type,
-    data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:0}]},
+    data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:0,hoverOffset:6}]},
     options:{
       responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:type==='bar'?'none':'bottom',labels:{font:{size:11},padding:8}}},
+      plugins:{
+        legend:{position:type==='bar'?'none':'bottom',labels:{font:{size:11},padding:8,usePointStyle:true}},
+        tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw}`}}
+      },
       scales:type==='bar'?{
         x:{grid:{display:false},ticks:{font:{size:11}}},
         y:{grid:{color:'#eee'},ticks:{font:{size:11},precision:0}}
-      }:{}
+      }:{},
+      onClick:(e,elements)=>{
+        if(onClickFn && elements.length>0){
+          const label=charts[id].data.labels[elements[0].index];
+          onClickFn(label);
+        }
+      },
+      onHover:(e,el)=>{e.native.target.style.cursor=el.length?'pointer':'default';}
     }
   });
 }
 
 loadData();
-setInterval(loadData, 120000);
+setInterval(loadData,120000);
 </script>
 </body>
 </html>
