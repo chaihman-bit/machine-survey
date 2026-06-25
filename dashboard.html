@@ -16,7 +16,6 @@
 }
 body{font-family:'Sarabun',-apple-system,BlinkMacSystemFont,sans-serif;background:#F0F4FA;color:var(--text);}
 
-/* Header */
 .header{background:var(--navy);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(0,0,0,.3);}
 .header-left{display:flex;align-items:center;gap:12px;}
 .header-icon{font-size:28px;}
@@ -28,23 +27,19 @@ body{font-family:'Sarabun',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .btn-refresh:hover{background:var(--orange-l);}
 .btn-refresh.loading{opacity:.7;pointer-events:none;}
 
-/* Loading */
 .loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;gap:16px;}
 .spinner{width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 1s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .loading-text{color:var(--steel);font-size:14px;}
 
-/* Error */
 .error-wrap{max-width:480px;margin:60px auto;text-align:center;padding:32px;background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.08);}
 .error-icon{font-size:48px;margin-bottom:12px;}
 .error-wrap h2{color:var(--red);margin-bottom:8px;}
 .error-wrap p{color:#666;font-size:13px;line-height:1.6;}
 .error-wrap code{background:#f5f5f5;padding:4px 8px;border-radius:6px;font-size:12px;display:block;margin:12px 0;word-break:break-all;}
 
-/* Main */
 main{max-width:1280px;margin:0 auto;padding:24px 20px;}
 
-/* KPI Cards */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px;}
 .kpi-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-top:4px solid var(--border);transition:.2s;}
 .kpi-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.1);}
@@ -58,15 +53,13 @@ main{max-width:1280px;margin:0 auto;padding:24px 20px;}
 .kpi-value{font-size:36px;font-weight:800;color:var(--navy);line-height:1;}
 .kpi-sub{font-size:11px;color:#aaa;margin-top:6px;}
 
-/* Charts Row */
 .charts-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px;}
 @media(max-width:900px){.charts-row{grid-template-columns:1fr 1fr;}}
 @media(max-width:600px){.charts-row{grid-template-columns:1fr;}}
 .chart-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.chart-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.chart-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:16px;}
 .chart-wrap{position:relative;height:200px;}
 
-/* Table */
 .table-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
 .table-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px;}
 .table-title{font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px;}
@@ -84,7 +77,6 @@ td{padding:10px 12px;border-bottom:1px solid var(--border);color:#333;vertical-a
 tr:hover td{background:#FAFBFF;}
 tr:last-child td{border-bottom:none;}
 
-/* Badges */
 .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:100px;font-size:11px;font-weight:700;}
 .badge-MOVE{background:#DBEAFE;color:#1D40AE;}
 .badge-SELL{background:#FEF3C7;color:#92400E;}
@@ -95,15 +87,12 @@ tr:last-child td{border-bottom:none;}
 .badge-C{background:var(--yellow-l);color:var(--yellow);}
 .badge-D{background:var(--red-l);color:var(--red);}
 .risk-flag{background:var(--red-l);color:var(--red);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;margin-right:4px;}
-
 .no-data{text-align:center;padding:40px;color:#aaa;}
 .count-badge{background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;}
 
-/* Empty state */
-.empty-state{text-align:center;padding:60px 20px;}
-.empty-icon{font-size:48px;margin-bottom:12px;}
-.empty-state h3{color:var(--navy);margin-bottom:8px;}
-.empty-state p{color:#888;font-size:13px;}
+/* Empty state banner */
+.empty-banner{background:var(--yellow-l);border:1px solid #F3C623;border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--yellow);}
+.empty-banner strong{display:block;font-size:14px;margin-bottom:2px;}
 </style>
 </head>
 <body>
@@ -132,64 +121,32 @@ tr:last-child td{border-bottom:none;}
 <div id="errorWrap" class="error-wrap" style="display:none">
   <div class="error-icon">⚠️</div>
   <h2>ไม่สามารถโหลดข้อมูลได้</h2>
-  <p>กรุณาตรวจสอบว่า Google Apps Script รองรับ GET request (<code>doGet</code>) แล้ว</p>
-  <p style="margin-top:8px;">URL ที่ใช้:</p>
+  <p>กรุณาตรวจสอบการเชื่อมต่อ Google Apps Script</p>
   <code id="errorUrl"></code>
   <p style="margin-top:12px;color:#999" id="errorMsg"></p>
 </div>
 
 <main id="mainContent" style="display:none">
-  <!-- KPI -->
+  <div id="emptyBanner" class="empty-banner" style="display:none">
+    <span style="font-size:24px">📋</span>
+    <div><strong>ยังไม่มีข้อมูลการสำรวจ</strong>ให้ทีมสนามกรอกข้อมูลผ่าน Survey Form แล้วกลับมาดูที่นี่</div>
+  </div>
+
   <div class="kpi-grid">
-    <div class="kpi-card total">
-      <div class="kpi-label">📋 สำรวจแล้ว</div>
-      <div class="kpi-value" id="kpiTotal">0</div>
-      <div class="kpi-sub">เครื่องจักรทั้งหมด</div>
-    </div>
-    <div class="kpi-card move">
-      <div class="kpi-label">🚚 MOVE</div>
-      <div class="kpi-value" id="kpiMove">0</div>
-      <div class="kpi-sub">ย้ายไปโรงงานใหม่</div>
-    </div>
-    <div class="kpi-card sell">
-      <div class="kpi-label">💰 SELL</div>
-      <div class="kpi-value" id="kpiSell">0</div>
-      <div class="kpi-sub">ขายออก</div>
-    </div>
-    <div class="kpi-card scrap">
-      <div class="kpi-label">🗑️ SCRAP</div>
-      <div class="kpi-value" id="kpiScrap">0</div>
-      <div class="kpi-sub">ทิ้ง/ซาก</div>
-    </div>
-    <div class="kpi-card new">
-      <div class="kpi-label">✨ NEW</div>
-      <div class="kpi-value" id="kpiNew">0</div>
-      <div class="kpi-sub">จัดซื้อใหม่</div>
-    </div>
-    <div class="kpi-card risk">
-      <div class="kpi-label">⚠️ RISK</div>
-      <div class="kpi-value" id="kpiRisk">0</div>
-      <div class="kpi-sub">มี Risk Flag</div>
-    </div>
+    <div class="kpi-card total"><div class="kpi-label">📋 สำรวจแล้ว</div><div class="kpi-value" id="kpiTotal">0</div><div class="kpi-sub">เครื่องจักรทั้งหมด</div></div>
+    <div class="kpi-card move"><div class="kpi-label">🚚 MOVE</div><div class="kpi-value" id="kpiMove">0</div><div class="kpi-sub">ย้ายไปโรงงานใหม่</div></div>
+    <div class="kpi-card sell"><div class="kpi-label">💰 SELL</div><div class="kpi-value" id="kpiSell">0</div><div class="kpi-sub">ขายออก</div></div>
+    <div class="kpi-card scrap"><div class="kpi-label">🗑️ SCRAP</div><div class="kpi-value" id="kpiScrap">0</div><div class="kpi-sub">ทิ้ง/ซาก</div></div>
+    <div class="kpi-card new"><div class="kpi-label">✨ NEW</div><div class="kpi-value" id="kpiNew">0</div><div class="kpi-sub">จัดซื้อใหม่</div></div>
+    <div class="kpi-card risk"><div class="kpi-label">⚠️ RISK</div><div class="kpi-value" id="kpiRisk">0</div><div class="kpi-sub">มี Risk Flag</div></div>
   </div>
 
-  <!-- Charts -->
   <div class="charts-row">
-    <div class="chart-card">
-      <div class="chart-title">📊 Action Breakdown</div>
-      <div class="chart-wrap"><canvas id="actionChart"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">🔧 Condition Summary</div>
-      <div class="chart-wrap"><canvas id="conditionChart"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">🏢 แผนก</div>
-      <div class="chart-wrap"><canvas id="deptChart"></canvas></div>
-    </div>
+    <div class="chart-card"><div class="chart-title">📊 Action Breakdown</div><div class="chart-wrap"><canvas id="actionChart"></canvas></div></div>
+    <div class="chart-card"><div class="chart-title">🔧 Condition Summary</div><div class="chart-wrap"><canvas id="conditionChart"></canvas></div></div>
+    <div class="chart-card"><div class="chart-title">🏢 แผนก</div><div class="chart-wrap"><canvas id="deptChart"></canvas></div></div>
   </div>
 
-  <!-- Table -->
   <div class="table-card">
     <div class="table-header">
       <div class="table-title">📋 รายการเครื่องจักรทั้งหมด <span class="count-badge" id="tableCount">0</span></div>
@@ -205,18 +162,7 @@ tr:last-child td{border-bottom:none;}
     </div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>เครื่องจักร</th>
-            <th>แผนก</th>
-            <th>Action</th>
-            <th>Condition</th>
-            <th>Risk</th>
-            <th>หมายเหตุ</th>
-            <th>วันที่</th>
-          </tr>
-        </thead>
+        <thead><tr><th>#</th><th>เครื่องจักร</th><th>แผนก</th><th>Action</th><th>Condition</th><th>Risk</th><th>หมายเหตุ</th><th>วันที่</th></tr></thead>
         <tbody id="tableBody"></tbody>
       </table>
     </div>
@@ -224,9 +170,6 @@ tr:last-child td{border-bottom:none;}
 </main>
 
 <script>
-// ══════════════════════════════════════════
-// CONFIG — ใส่ URL ของ Apps Script ที่นี่
-// ══════════════════════════════════════════
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznn80aMHoWfYFF-V6vSeagYaV0dcSlCA4ffObWRJ9cwAzYYwtjGWwZHtif9ks921U/exec';
 
 let allData = [];
@@ -239,14 +182,19 @@ async function loadData() {
   btn.innerHTML = '<span>⏳</span> กำลังโหลด...';
 
   try {
-    const url = APPS_SCRIPT_URL + '?action=getData';
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await fetch(APPS_SCRIPT_URL + '?action=getData');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
 
-    if (!json.data) throw new Error('ไม่พบ data ใน response');
+    // "Sheet not found" = ยังไม่มี submission → แสดง empty state
+    if (json.success === false) {
+      allData = [];
+      document.getElementById('emptyBanner').style.display = 'flex';
+    } else {
+      allData = json.data || [];
+      document.getElementById('emptyBanner').style.display = allData.length === 0 ? 'flex' : 'none';
+    }
 
-    allData = json.data;
     document.getElementById('loadingWrap').style.display = 'none';
     document.getElementById('errorWrap').style.display = 'none';
     document.getElementById('mainContent').style.display = 'block';
@@ -267,15 +215,15 @@ async function loadData() {
 }
 
 function count(field, val) {
-  return allData.filter(r => (r[field] || '').toUpperCase() === val.toUpperCase()).length;
+  return allData.filter(r => (r[field]||'').toUpperCase() === val.toUpperCase()).length;
 }
 
 function updateKPIs() {
   document.getElementById('kpiTotal').textContent = allData.length;
-  document.getElementById('kpiMove').textContent  = count('action', 'MOVE');
-  document.getElementById('kpiSell').textContent  = count('action', 'SELL');
-  document.getElementById('kpiScrap').textContent = count('action', 'SCRAP');
-  document.getElementById('kpiNew').textContent   = count('action', 'NEW');
+  document.getElementById('kpiMove').textContent  = count('action','MOVE');
+  document.getElementById('kpiSell').textContent  = count('action','SELL');
+  document.getElementById('kpiScrap').textContent = count('action','SCRAP');
+  document.getElementById('kpiNew').textContent   = count('action','NEW');
   document.getElementById('kpiRisk').textContent  = allData.filter(r => r.hasRisk).length;
 }
 
@@ -287,45 +235,29 @@ function makeChart(id, type, labels, data, colors) {
     data: { labels, datasets: [{ data, backgroundColor: colors, borderWidth: 0 }] },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { position: type === 'bar' ? 'none' : 'bottom', labels: { font: { size: 11 }, padding: 8 } }
-      },
-      scales: type === 'bar' ? {
-        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-        y: { grid: { color: '#eee' }, ticks: { font: { size: 11 }, precision: 0 } }
+      plugins: { legend: { position: type==='bar'?'none':'bottom', labels: { font:{size:11}, padding:8 } } },
+      scales: type==='bar' ? {
+        x:{grid:{display:false},ticks:{font:{size:11}}},
+        y:{grid:{color:'#eee'},ticks:{font:{size:11},precision:0}}
       } : {}
     }
   });
 }
 
 function updateCharts() {
-  // Action pie
-  makeChart('actionChart', 'doughnut',
-    ['MOVE','SELL','SCRAP','NEW'],
-    ['MOVE','SELL','SCRAP','NEW'].map(a => count('action', a)),
-    ['#2563EB','#E87722','#DC2626','#1D6E3F']
-  );
-
-  // Condition bar
-  const conds = ['A','B','C','D'];
-  makeChart('conditionChart', 'bar',
-    conds, conds.map(c => count('condition', c)),
-    ['#1D6E3F','#2563EB','#856404','#DC2626']
-  );
-
-  // Department doughnut
-  const deptMap = {};
-  allData.forEach(r => { const d = r.department || 'N/A'; deptMap[d] = (deptMap[d] || 0) + 1; });
-  const depts = Object.entries(deptMap).sort((a,b) => b[1]-a[1]).slice(0, 8);
-  const palette = ['#0D1B2A','#1B3A5C','#E87722','#2563EB','#1D6E3F','#856404','#DC2626','#7C3AED'];
-  makeChart('deptChart', 'doughnut',
-    depts.map(d=>d[0]), depts.map(d=>d[1]),
-    palette
-  );
+  makeChart('actionChart','doughnut',['MOVE','SELL','SCRAP','NEW'],
+    ['MOVE','SELL','SCRAP','NEW'].map(a=>count('action',a)),['#2563EB','#E87722','#DC2626','#1D6E3F']);
+  makeChart('conditionChart','bar',['A','B','C','D'],
+    ['A','B','C','D'].map(c=>count('condition',c)),['#1D6E3F','#2563EB','#856404','#DC2626']);
+  const deptMap={};
+  allData.forEach(r=>{const d=r.department||'N/A';deptMap[d]=(deptMap[d]||0)+1;});
+  const depts=Object.entries(deptMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  makeChart('deptChart','doughnut',depts.map(d=>d[0]),depts.map(d=>d[1]),
+    ['#0D1B2A','#1B3A5C','#E87722','#2563EB','#1D6E3F','#856404','#DC2626','#7C3AED']);
 }
 
 function setFilter(btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   currentFilter = btn.dataset.filter;
   renderTable();
@@ -334,47 +266,35 @@ function setFilter(btn) {
 function renderTable() {
   const search = document.getElementById('searchInput').value.toLowerCase();
   let rows = allData.filter(r => {
-    if (currentFilter === 'RISK') return r.hasRisk;
-    if (currentFilter !== 'ALL') return (r.action || '').toUpperCase() === currentFilter;
+    if (currentFilter==='RISK') return r.hasRisk;
+    if (currentFilter!=='ALL') return (r.action||'').toUpperCase()===currentFilter;
     return true;
-  }).filter(r => {
-    if (!search) return true;
-    return JSON.stringify(r).toLowerCase().includes(search);
-  });
+  }).filter(r => !search || JSON.stringify(r).toLowerCase().includes(search));
 
   document.getElementById('tableCount').textContent = rows.length;
   const tbody = document.getElementById('tableBody');
 
-  if (rows.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="8" class="no-data">ไม่พบข้อมูล</td></tr>`;
+  if (rows.length===0) {
+    tbody.innerHTML = `<tr><td colspan="8" class="no-data">${allData.length===0 ? '📋 ยังไม่มีข้อมูล — รอทีมสนามกรอกแบบฟอร์ม' : 'ไม่พบข้อมูลที่ค้นหา'}</td></tr>`;
     return;
   }
 
-  tbody.innerHTML = rows.map((r, i) => `
+  tbody.innerHTML = rows.map((r,i) => `
     <tr>
       <td style="color:#aaa;font-size:11px">${i+1}</td>
-      <td><strong>${escHtml(r.machineName || r.machine_name || '—')}</strong>
-        ${r.machineId ? `<br><span style="font-size:10px;color:#aaa">${escHtml(r.machineId)}</span>` : ''}</td>
-      <td>${escHtml(r.department || '—')}</td>
-      <td><span class="badge badge-${(r.action||'').toUpperCase()}">${r.action || '—'}</span></td>
-      <td><span class="badge badge-${(r.condition||'').toUpperCase()}">${r.condition || '—'}</span></td>
-      <td>${r.hasRisk ? `<span class="risk-flag">⚠️ RISK</span>` : '<span style="color:#ccc">—</span>'}</td>
-      <td style="max-width:200px;font-size:12px;color:#666">${escHtml((r.notes || r.remark || '').slice(0,80))}</td>
-      <td style="font-size:11px;color:#999;white-space:nowrap">${formatDate(r.timestamp || r.date)}</td>
-    </tr>
-  `).join('');
+      <td><strong>${esc(r.machineName||'—')}</strong>${r.machineId?`<br><span style="font-size:10px;color:#aaa">${esc(r.machineId)}</span>`:''}</td>
+      <td>${esc(r.department||'—')}</td>
+      <td><span class="badge badge-${(r.action||'').toUpperCase()}">${r.action||'—'}</span></td>
+      <td><span class="badge badge-${(r.condition||'').toUpperCase()}">${r.condition||'—'}</span></td>
+      <td>${r.hasRisk?'<span class="risk-flag">⚠️ RISK</span>':'<span style="color:#ccc">—</span>'}</td>
+      <td style="max-width:200px;font-size:12px;color:#666">${esc((r.notes||'').slice(0,80))}</td>
+      <td style="font-size:11px;color:#999;white-space:nowrap">${fmtDate(r.timestamp)}</td>
+    </tr>`).join('');
 }
 
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-function formatDate(d) {
-  if (!d) return '—';
-  try { return new Date(d).toLocaleDateString('th-TH', {day:'2-digit',month:'short',year:'2-digit'}); }
-  catch { return d; }
-}
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const fmtDate = d => { try{ return d ? new Date(d).toLocaleDateString('th-TH',{day:'2-digit',month:'short',year:'2-digit'}) : '—'; }catch{return d||'—';} };
 
-// Load on start + auto-refresh every 2 min
 loadData();
 setInterval(loadData, 120000);
 </script>
