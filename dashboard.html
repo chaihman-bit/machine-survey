@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏭 Machine Survey Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#0D1B2A;--steel:#1B3A5C;--orange:#E87722;--orange-l:#F4A55A;
+  --light:#EEF4FB;--white:#fff;--border:#DDE4EE;--radius:12px;
+  --green:#1D6E3F;--green-l:#D6F0E0;--red:#8B1A1A;--red-l:#FFE0E0;
+  --yellow:#856404;--yellow-l:#FFF3CD;--blue:#1B3A5C;--blue-l:#EEF4FB;
+  --gray:#F5F5F5;--text:#1A1A2E;
+}
+body{font-family:'Sarabun',-apple-system,BlinkMacSystemFont,sans-serif;background:#F0F4FA;color:var(--text);}
+
+/* Header */
+.header{background:var(--navy);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(0,0,0,.3);}
+.header-left{display:flex;align-items:center;gap:12px;}
+.header-icon{font-size:28px;}
+.header-text h1{font-size:18px;font-weight:700;color:#fff;}
+.header-text p{font-size:11px;color:var(--orange-l);margin-top:2px;}
+.header-right{display:flex;align-items:center;gap:12px;}
+.last-update{font-size:11px;color:rgba(255,255,255,.6);}
+.btn-refresh{background:var(--orange);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit;}
+.btn-refresh:hover{background:var(--orange-l);}
+.btn-refresh.loading{opacity:.7;pointer-events:none;}
+
+/* Loading */
+.loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;gap:16px;}
+.spinner{width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{color:var(--steel);font-size:14px;}
+
+/* Error */
+.error-wrap{max-width:480px;margin:60px auto;text-align:center;padding:32px;background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.08);}
+.error-icon{font-size:48px;margin-bottom:12px;}
+.error-wrap h2{color:var(--red);margin-bottom:8px;}
+.error-wrap p{color:#666;font-size:13px;line-height:1.6;}
+.error-wrap code{background:#f5f5f5;padding:4px 8px;border-radius:6px;font-size:12px;display:block;margin:12px 0;word-break:break-all;}
+
+/* Main */
+main{max-width:1280px;margin:0 auto;padding:24px 20px;}
+
+/* KPI Cards */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px;}
+.kpi-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-top:4px solid var(--border);transition:.2s;}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.1);}
+.kpi-card.total{border-top-color:var(--navy);}
+.kpi-card.move{border-top-color:#2563EB;}
+.kpi-card.sell{border-top-color:var(--orange);}
+.kpi-card.scrap{border-top-color:#DC2626;}
+.kpi-card.new{border-top-color:var(--green);}
+.kpi-card.risk{border-top-color:#F59E0B;}
+.kpi-label{font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.kpi-value{font-size:36px;font-weight:800;color:var(--navy);line-height:1;}
+.kpi-sub{font-size:11px;color:#aaa;margin-top:6px;}
+
+/* Charts Row */
+.charts-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px;}
+@media(max-width:900px){.charts-row{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.charts-row{grid-template-columns:1fr;}}
+.chart-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.chart-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.chart-wrap{position:relative;height:200px;}
+
+/* Table */
+.table-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.table-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px;}
+.table-title{font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px;}
+.filter-wrap{display:flex;gap:8px;flex-wrap:wrap;}
+.filter-btn{background:var(--gray);border:none;padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;color:#555;transition:.15s;}
+.filter-btn:hover{background:var(--border);}
+.filter-btn.active{background:var(--navy);color:#fff;}
+.search-input{border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;width:200px;font-family:inherit;outline:none;}
+.search-input:focus{border-color:var(--orange);}
+
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:var(--light);color:var(--navy);font-weight:700;padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
+td{padding:10px 12px;border-bottom:1px solid var(--border);color:#333;vertical-align:middle;}
+tr:hover td{background:#FAFBFF;}
+tr:last-child td{border-bottom:none;}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:100px;font-size:11px;font-weight:700;}
+.badge-MOVE{background:#DBEAFE;color:#1D40AE;}
+.badge-SELL{background:#FEF3C7;color:#92400E;}
+.badge-SCRAP{background:#FEE2E2;color:#991B1B;}
+.badge-NEW{background:var(--green-l);color:var(--green);}
+.badge-A{background:#D1FAE5;color:#065F46;}
+.badge-B{background:#DBEAFE;color:#1E40AF;}
+.badge-C{background:var(--yellow-l);color:var(--yellow);}
+.badge-D{background:var(--red-l);color:var(--red);}
+.risk-flag{background:var(--red-l);color:var(--red);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;margin-right:4px;}
+
+.no-data{text-align:center;padding:40px;color:#aaa;}
+.count-badge{background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;}
+
+/* Empty state */
+.empty-state{text-align:center;padding:60px 20px;}
+.empty-icon{font-size:48px;margin-bottom:12px;}
+.empty-state h3{color:var(--navy);margin-bottom:8px;}
+.empty-state p{color:#888;font-size:13px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-icon">🏭</div>
+    <div class="header-text">
+      <h1>Machine Survey Dashboard</h1>
+      <p>Factory Relocation — Real-time Data</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="last-update" id="lastUpdate">—</span>
+    <button class="btn-refresh" id="refreshBtn" onclick="loadData()">
+      <span>🔄</span> รีเฟรช
+    </button>
+  </div>
+</div>
+
+<div id="loadingWrap" class="loading-wrap">
+  <div class="spinner"></div>
+  <div class="loading-text">กำลังโหลดข้อมูล...</div>
+</div>
+
+<div id="errorWrap" class="error-wrap" style="display:none">
+  <div class="error-icon">⚠️</div>
+  <h2>ไม่สามารถโหลดข้อมูลได้</h2>
+  <p>กรุณาตรวจสอบว่า Google Apps Script รองรับ GET request (<code>doGet</code>) แล้ว</p>
+  <p style="margin-top:8px;">URL ที่ใช้:</p>
+  <code id="errorUrl"></code>
+  <p style="margin-top:12px;color:#999" id="errorMsg"></p>
+</div>
+
+<main id="mainContent" style="display:none">
+  <!-- KPI -->
+  <div class="kpi-grid">
+    <div class="kpi-card total">
+      <div class="kpi-label">📋 สำรวจแล้ว</div>
+      <div class="kpi-value" id="kpiTotal">0</div>
+      <div class="kpi-sub">เครื่องจักรทั้งหมด</div>
+    </div>
+    <div class="kpi-card move">
+      <div class="kpi-label">🚚 MOVE</div>
+      <div class="kpi-value" id="kpiMove">0</div>
+      <div class="kpi-sub">ย้ายไปโรงงานใหม่</div>
+    </div>
+    <div class="kpi-card sell">
+      <div class="kpi-label">💰 SELL</div>
+      <div class="kpi-value" id="kpiSell">0</div>
+      <div class="kpi-sub">ขายออก</div>
+    </div>
+    <div class="kpi-card scrap">
+      <div class="kpi-label">🗑️ SCRAP</div>
+      <div class="kpi-value" id="kpiScrap">0</div>
+      <div class="kpi-sub">ทิ้ง/ซาก</div>
+    </div>
+    <div class="kpi-card new">
+      <div class="kpi-label">✨ NEW</div>
+      <div class="kpi-value" id="kpiNew">0</div>
+      <div class="kpi-sub">จัดซื้อใหม่</div>
+    </div>
+    <div class="kpi-card risk">
+      <div class="kpi-label">⚠️ RISK</div>
+      <div class="kpi-value" id="kpiRisk">0</div>
+      <div class="kpi-sub">มี Risk Flag</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-title">📊 Action Breakdown</div>
+      <div class="chart-wrap"><canvas id="actionChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">🔧 Condition Summary</div>
+      <div class="chart-wrap"><canvas id="conditionChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">🏢 แผนก</div>
+      <div class="chart-wrap"><canvas id="deptChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-title">📋 รายการเครื่องจักรทั้งหมด <span class="count-badge" id="tableCount">0</span></div>
+      <div class="filter-wrap">
+        <input class="search-input" type="text" id="searchInput" placeholder="🔍 ค้นหา..." oninput="renderTable()">
+        <button class="filter-btn active" data-filter="ALL" onclick="setFilter(this)">ทั้งหมด</button>
+        <button class="filter-btn" data-filter="MOVE" onclick="setFilter(this)">🚚 MOVE</button>
+        <button class="filter-btn" data-filter="SELL" onclick="setFilter(this)">💰 SELL</button>
+        <button class="filter-btn" data-filter="SCRAP" onclick="setFilter(this)">🗑️ SCRAP</button>
+        <button class="filter-btn" data-filter="NEW" onclick="setFilter(this)">✨ NEW</button>
+        <button class="filter-btn" data-filter="RISK" onclick="setFilter(this)">⚠️ RISK</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>เครื่องจักร</th>
+            <th>แผนก</th>
+            <th>Action</th>
+            <th>Condition</th>
+            <th>Risk</th>
+            <th>หมายเหตุ</th>
+            <th>วันที่</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+// ══════════════════════════════════════════
+// CONFIG — ใส่ URL ของ Apps Script ที่นี่
+// ══════════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznn80aMHoWfYFF-V6vSeagYaV0dcSlCA4ffObWRJ9cwAzYYwtjGWwZHtif9ks921U/exec';
+
+let allData = [];
+let currentFilter = 'ALL';
+let charts = {};
+
+async function loadData() {
+  const btn = document.getElementById('refreshBtn');
+  btn.classList.add('loading');
+  btn.innerHTML = '<span>⏳</span> กำลังโหลด...';
+
+  try {
+    const url = APPS_SCRIPT_URL + '?action=getData';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+
+    if (!json.data) throw new Error('ไม่พบ data ใน response');
+
+    allData = json.data;
+    document.getElementById('loadingWrap').style.display = 'none';
+    document.getElementById('errorWrap').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    document.getElementById('lastUpdate').textContent = '🕐 ' + new Date().toLocaleTimeString('th-TH');
+
+    updateKPIs();
+    updateCharts();
+    renderTable();
+  } catch (e) {
+    document.getElementById('loadingWrap').style.display = 'none';
+    document.getElementById('errorWrap').style.display = 'block';
+    document.getElementById('errorUrl').textContent = APPS_SCRIPT_URL + '?action=getData';
+    document.getElementById('errorMsg').textContent = 'Error: ' + e.message;
+  } finally {
+    btn.classList.remove('loading');
+    btn.innerHTML = '<span>🔄</span> รีเฟรช';
+  }
+}
+
+function count(field, val) {
+  return allData.filter(r => (r[field] || '').toUpperCase() === val.toUpperCase()).length;
+}
+
+function updateKPIs() {
+  document.getElementById('kpiTotal').textContent = allData.length;
+  document.getElementById('kpiMove').textContent  = count('action', 'MOVE');
+  document.getElementById('kpiSell').textContent  = count('action', 'SELL');
+  document.getElementById('kpiScrap').textContent = count('action', 'SCRAP');
+  document.getElementById('kpiNew').textContent   = count('action', 'NEW');
+  document.getElementById('kpiRisk').textContent  = allData.filter(r => r.hasRisk).length;
+}
+
+function makeChart(id, type, labels, data, colors) {
+  if (charts[id]) charts[id].destroy();
+  const ctx = document.getElementById(id).getContext('2d');
+  charts[id] = new Chart(ctx, {
+    type,
+    data: { labels, datasets: [{ data, backgroundColor: colors, borderWidth: 0 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: type === 'bar' ? 'none' : 'bottom', labels: { font: { size: 11 }, padding: 8 } }
+      },
+      scales: type === 'bar' ? {
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { grid: { color: '#eee' }, ticks: { font: { size: 11 }, precision: 0 } }
+      } : {}
+    }
+  });
+}
+
+function updateCharts() {
+  // Action pie
+  makeChart('actionChart', 'doughnut',
+    ['MOVE','SELL','SCRAP','NEW'],
+    ['MOVE','SELL','SCRAP','NEW'].map(a => count('action', a)),
+    ['#2563EB','#E87722','#DC2626','#1D6E3F']
+  );
+
+  // Condition bar
+  const conds = ['A','B','C','D'];
+  makeChart('conditionChart', 'bar',
+    conds, conds.map(c => count('condition', c)),
+    ['#1D6E3F','#2563EB','#856404','#DC2626']
+  );
+
+  // Department doughnut
+  const deptMap = {};
+  allData.forEach(r => { const d = r.department || 'N/A'; deptMap[d] = (deptMap[d] || 0) + 1; });
+  const depts = Object.entries(deptMap).sort((a,b) => b[1]-a[1]).slice(0, 8);
+  const palette = ['#0D1B2A','#1B3A5C','#E87722','#2563EB','#1D6E3F','#856404','#DC2626','#7C3AED'];
+  makeChart('deptChart', 'doughnut',
+    depts.map(d=>d[0]), depts.map(d=>d[1]),
+    palette
+  );
+}
+
+function setFilter(btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = btn.dataset.filter;
+  renderTable();
+}
+
+function renderTable() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  let rows = allData.filter(r => {
+    if (currentFilter === 'RISK') return r.hasRisk;
+    if (currentFilter !== 'ALL') return (r.action || '').toUpperCase() === currentFilter;
+    return true;
+  }).filter(r => {
+    if (!search) return true;
+    return JSON.stringify(r).toLowerCase().includes(search);
+  });
+
+  document.getElementById('tableCount').textContent = rows.length;
+  const tbody = document.getElementById('tableBody');
+
+  if (rows.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="8" class="no-data">ไม่พบข้อมูล</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = rows.map((r, i) => `
+    <tr>
+      <td style="color:#aaa;font-size:11px">${i+1}</td>
+      <td><strong>${escHtml(r.machineName || r.machine_name || '—')}</strong>
+        ${r.machineId ? `<br><span style="font-size:10px;color:#aaa">${escHtml(r.machineId)}</span>` : ''}</td>
+      <td>${escHtml(r.department || '—')}</td>
+      <td><span class="badge badge-${(r.action||'').toUpperCase()}">${r.action || '—'}</span></td>
+      <td><span class="badge badge-${(r.condition||'').toUpperCase()}">${r.condition || '—'}</span></td>
+      <td>${r.hasRisk ? `<span class="risk-flag">⚠️ RISK</span>` : '<span style="color:#ccc">—</span>'}</td>
+      <td style="max-width:200px;font-size:12px;color:#666">${escHtml((r.notes || r.remark || '').slice(0,80))}</td>
+      <td style="font-size:11px;color:#999;white-space:nowrap">${formatDate(r.timestamp || r.date)}</td>
+    </tr>
+  `).join('');
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function formatDate(d) {
+  if (!d) return '—';
+  try { return new Date(d).toLocaleDateString('th-TH', {day:'2-digit',month:'short',year:'2-digit'}); }
+  catch { return d; }
+}
+
+// Load on start + auto-refresh every 2 min
+loadData();
+setInterval(loadData, 120000);
+</script>
+</body>
+</html>
